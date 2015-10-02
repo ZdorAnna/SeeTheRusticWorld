@@ -6,21 +6,21 @@
 //  Copyright (c) 2015 anna. All rights reserved.
 //
 
-#import "STRWCoreDataManager.h"
+#import "STCoreDataManager.h"
 
-@implementation STRWCoreDataManager
+@implementation STCoreDataManager
 
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-+ (STRWCoreDataManager *)sharedManager {
-    static STRWCoreDataManager *manager = nil;
++ (STCoreDataManager *)sharedManager {
+    static STCoreDataManager *manager = nil;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        manager = [[STRWCoreDataManager alloc] init];
+        manager = [[STCoreDataManager alloc] init];
     });
     
     return manager;

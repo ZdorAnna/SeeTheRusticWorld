@@ -6,13 +6,15 @@
 //  Copyright (c) 2015 anna. All rights reserved.
 //
 
-#import "STRWTableViewController.h"
+#import "STTableViewController.h"
 
-@interface STRWTableViewController ()
+NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentifier";
+
+@interface STTableViewController ()
 
 @end
 
-@implementation STRWTableViewController
+@implementation STTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

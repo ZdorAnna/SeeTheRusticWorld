@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  STTableViewCell.h
 //  SeeTheRusticWorld
 //
 //  Created by anna on 10/2/15.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface STRWTableViewController : UITableViewController
+extern NSString *const STTableViewCellIdentifier;
 
+@interface STTableViewCell : UITableViewCell
 
 @end
-
