@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@class STDataSource;
 
 extern NSString *const STTableViewControllerIdentifier;
 
 @interface STTableViewController : UITableViewController
 
+@property (nonatomic, strong) STDataSource *dataSource;
 
 @end
 

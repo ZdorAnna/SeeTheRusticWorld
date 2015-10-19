@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class STPost;
 extern NSString *const STTableViewCellIdentifier;
 
 @interface STTableViewCell : UITableViewCell
+
+- (void)setContent:(STPost *)content;
 
 @end

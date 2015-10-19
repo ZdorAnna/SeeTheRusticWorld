@@ -7,6 +7,7 @@
 //
 
 #import "STCollectionViewCell.h"
+#import "STPost.h"
 
 NSString *const STCollectionViewCellIdentifier = @"STCollectionViewCellIdentifier";
 
@@ -18,7 +19,7 @@ NSString *const STCollectionViewCellIdentifier = @"STCollectionViewCellIdentifie
 
 @implementation STCollectionViewCell
 
-//- (void)setContent:(MSContent *)content {
+//- (void)setPost:(STPost *)content {
 //    self.contentImage.image = [UIImage imageNamed:content.imageName];
 //}
 

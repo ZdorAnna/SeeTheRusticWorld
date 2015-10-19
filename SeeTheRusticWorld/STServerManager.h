@@ -11,5 +11,7 @@
 @interface STServerManager : NSObject
 
 + (STServerManager *)sharedManager;
+- (NSURLRequest *)userAuthorizationRequest;
+- (void)authorizeUser;
 
 @end

@@ -7,10 +7,13 @@
 //
 
 #import "STTableViewController.h"
+#import "STTableViewCell.h"
+#import "UIImageView+AFNetworking.h"
+#import "STDataSource.h"
 
 NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentifier";
 
-@interface STTableViewController ()
+@interface STTableViewController () <UITableViewDataSource>
 
 @end
 
@@ -18,12 +21,41 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.dataSource = [[STDataSource alloc] init];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+   // return [self.dataSource contentCount];
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    STTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:STTableViewCellIdentifier
+                                                            forIndexPath:indexPath];
+    [cell setContent:[self.dataSource contentAtIndexPath:indexPath]];
+/*
+    NSURL *url = [NSURL URLWithString:@"https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s320x320/e35/12142039_533666396796116_873267970_n.jpg"];
+    
+     NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    __weak UITableViewCell* weakCell = cell;
+    [cell.imageView
+     setImageWithURLRequest:request
+     placeholderImage:nil
+     success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+       weakCell.imageView.image = image;
+         [weakCell layoutSubviews];
+     }
+     failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+         
+     }];
+ */
+    
+    return cell;
 }
 
 @end

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString *const STContainerViewControllerIdentifier;
+
 @interface STContainerViewController : UIViewController
 
 - (void)changeController;

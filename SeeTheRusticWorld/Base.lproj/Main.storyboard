@@ -24,6 +24,7 @@
         <!--See the Rustic World-->
         <scene sceneID="ZGi-L6-kTn">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WVa-s8-k6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Nhv-12-zkP" customClass="STMainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6Yl-sH-QS8"/>
@@ -36,7 +37,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ba-vV-HKH">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <connections>
-                                    <segue destination="d2K-sz-Xbi" kind="embed" id="99G-eX-Tp2"/>
+                                    <segue destination="d2K-sz-Xbi" kind="embed" identifier="STEmbedContainer" id="99G-eX-Tp2"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -51,14 +52,13 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="LrQ-f1-ss9"/>
                     </navigationItem>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WVa-s8-k6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="613" y="-24"/>
         </scene>
         <!--Container View Controller-->
         <scene sceneID="JFP-fj-AMH">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="d2K-sz-Xbi" customClass="STContainerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="STContainerViewControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="d2K-sz-Xbi" customClass="STContainerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jWA-za-ypw"/>
                         <viewControllerLayoutGuide type="bottom" id="7OA-ct-p0g"/>
@@ -78,16 +78,31 @@
         <scene sceneID="DJL-Hm-xjI">
             <objects>
                 <tableViewController storyboardIdentifier="STTableViewControllerIdentifier" id="xBu-p3-PUt" customClass="STTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0Bz-Gl-3D4">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="22" sectionFooterHeight="22" id="0Bz-Gl-3D4">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="8FT-vT-RB3">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="STTableViewCellIdentifier" rowHeight="92" id="8FT-vT-RB3" customClass="STTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8FT-vT-RB3" id="74c-Qu-QTT">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DxD-OQ-NBS">
+                                            <rect key="frame" x="206" y="35" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EwR-yP-fc9">
+                                            <rect key="frame" x="307" y="0.0" width="185" height="91"/>
+                                        </imageView>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="contentImage" destination="EwR-yP-fc9" id="E9n-HG-X98"/>
+                                    <outlet property="contentText" destination="DxD-OQ-NBS" id="uwq-mQ-EP8"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -114,12 +129,17 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Xnc-Ba-kbI">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Xnc-Ba-kbI" customClass="STCollectionViewCell">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yOV-Ep-z4J">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        </imageView>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </collectionViewCell>

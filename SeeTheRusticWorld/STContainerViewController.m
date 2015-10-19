@@ -10,6 +10,8 @@
 #import "STCollectionViewController.h"
 #import "STTableViewController.h"
 
+NSString *const STContainerViewControllerIdentifier = @"STContainerViewControllerIdentifier";
+
 @interface STContainerViewController ()
 
 @property (nonatomic, strong) UIViewController *collectionViewController;
@@ -22,9 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.isTableViewControllerVisible = YES;
-    
     self.tableViewController = [self.storyboard instantiateViewControllerWithIdentifier:STTableViewControllerIdentifier];
     [self displayViewController:self.tableViewController];
 }

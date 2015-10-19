@@ -15,9 +15,11 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
++ (STCoreDataManager *)sharedManager;
+
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
-+ (STCoreDataManager *)sharedManager;
+
 
 @end
