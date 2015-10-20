@@ -25,7 +25,6 @@ NSString *const STTableViewCellIdentifier = @"STTableViewCellIdentifier";
 - (void)setContent:(STPost *)content {
     
     self.contentText.text = content.text;
-    
     NSString *str = [NSString stringWithFormat:@"%@", content.imageURL];
     NSURL *url = [NSURL URLWithString:str];
     [self.contentImage setImageWithURL:url];

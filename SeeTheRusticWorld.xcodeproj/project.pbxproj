@@ -40,7 +40,6 @@
 		95BA4E481BBEC60000CB9D48 /* STTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BA4E471BBEC60000CB9D48 /* STTableViewCell.m */; };
 		95BA4E4B1BBEC78500CB9D48 /* STServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BA4E4A1BBEC78500CB9D48 /* STServerManager.m */; };
 		95DCE8131BD4F7E500A31B08 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95DCE8121BD4F7E500A31B08 /* Default-568h@2x.png */; };
-		95DCE8231BD5596100A31B08 /* STDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95DCE8221BD5596100A31B08 /* STDataManager.m */; };
 		95DCE8291BD6208800A31B08 /* STPost.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95DCE8271BD6208800A31B08 /* STPost.xcdatamodeld */; };
 		95DCE82A1BD6208800A31B08 /* STPost.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95DCE8271BD6208800A31B08 /* STPost.xcdatamodeld */; };
 /* End PBXBuildFile section */
@@ -129,8 +128,6 @@
 		95BA4E491BBEC78500CB9D48 /* STServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STServerManager.h; sourceTree = "<group>"; };
 		95BA4E4A1BBEC78500CB9D48 /* STServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STServerManager.m; sourceTree = "<group>"; };
 		95DCE8121BD4F7E500A31B08 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		95DCE8211BD5596100A31B08 /* STDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDataManager.h; sourceTree = "<group>"; };
-		95DCE8221BD5596100A31B08 /* STDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDataManager.m; sourceTree = "<group>"; };
 		95DCE8281BD6208800A31B08 /* STPost.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = STPost.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -255,7 +252,6 @@
 			children = (
 				95BA4DF91BBEA88200CB9D48 /* AppDelegate */,
 				959C21641BD25C06004329D9 /* Server */,
-				95DCE8201BD5590E00A31B08 /* Mapping */,
 				95BA4E001BBEAC6200CB9D48 /* Data Source */,
 				957C2A821BC436F8004D636E /* Test */,
 				95BA4DF61BBEA82900CB9D48 /* Model */,
@@ -352,15 +348,6 @@
 				950A1BF11BCE5C9600800C2F /* STDataSource.m */,
 			);
 			name = "Data Source";
-			sourceTree = "<group>";
-		};
-		95DCE8201BD5590E00A31B08 /* Mapping */ = {
-			isa = PBXGroup;
-			children = (
-				95DCE8211BD5596100A31B08 /* STDataManager.h */,
-				95DCE8221BD5596100A31B08 /* STDataManager.m */,
-			);
-			name = Mapping;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -470,7 +457,6 @@
 				9592DF4C1BC9513100CA2581 /* AFHTTPRequestOperationManager.m in Sources */,
 				95BA4DFC1BBEAA0A00CB9D48 /* STCoreDataManager.m in Sources */,
 				95DCE8291BD6208800A31B08 /* STPost.xcdatamodeld in Sources */,
-				95DCE8231BD5596100A31B08 /* STDataManager.m in Sources */,
 				95BA4DD01BBEA81C00CB9D48 /* main.m in Sources */,
 				95BA4E451BBEC5EA00CB9D48 /* STCollectionViewCell.m in Sources */,
 				95BA4E481BBEC60000CB9D48 /* STTableViewCell.m in Sources */,

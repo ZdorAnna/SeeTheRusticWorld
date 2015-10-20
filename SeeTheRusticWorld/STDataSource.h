@@ -14,8 +14,6 @@
 
 - (STPost *)contentAtIndexPath:(NSIndexPath *)indexPath;
 - (NSInteger)contentCount;
-
 - (void)loadNextPage;
-
 
 @end

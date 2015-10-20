@@ -24,7 +24,6 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
     self.dataSource = [[STDataSource alloc] init];
 }
 
-
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -44,16 +43,10 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if ([self.dataSource contentCount] >= MIN_COUNT_CELLS) {
-        NSLog(@"");
-
         if (indexPath.row == ([self.dataSource contentCount] - 1)){
-            NSLog(@"ccccccc");
-
             [self.dataSource loadNextPage];
-
         }
     }
 }
-
 
 @end

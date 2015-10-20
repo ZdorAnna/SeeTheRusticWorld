@@ -8,9 +8,7 @@
 
 #import "STLoginViewController.h"
 #import "STServerManager.h"
-
 #import "STMainViewController.h"
-
 
 @interface STLoginViewController ()
 
@@ -42,7 +40,7 @@
     [self.webView loadRequest:request];
 }
 
-- (void) displayContainerViewController {
+- (void)displayContainerViewController {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *nextVC  = [storyboard
                                  instantiateViewControllerWithIdentifier:STMainViewControllerIdentifier];
@@ -56,15 +54,15 @@
     if ([[[request URL] description] rangeOfString:@"code="].location != NSNotFound) {
         
         NSString *authToken;
-        NSString* query = [[request URL] description];
-        NSArray* array = [query componentsSeparatedByString:@"?"];
+        NSString *query = [[request URL] description];
+        NSArray *array = [query componentsSeparatedByString:@"?"];
         
         if ([array count] > 1) {
             query = [array lastObject];
         }
-        NSArray* values = [query componentsSeparatedByString:@"="];
+        NSArray *values = [query componentsSeparatedByString:@"="];
         if ([values count] == 2) {
-            NSString* key = [values firstObject];
+            NSString *key = [values firstObject];
             
             if ([key isEqualToString:@"code"]) {
                authToken = [values lastObject];

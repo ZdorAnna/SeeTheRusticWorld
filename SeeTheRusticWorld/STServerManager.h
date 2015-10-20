@@ -9,23 +9,16 @@
 #import <Foundation/Foundation.h>
 
 typedef void(^STPostsDictionaryBlock)(NSDictionary *posts);
-
 typedef void(^STTokenBlock)(NSString *accessToken);
-
-typedef void(^STErrorBlock)(NSError* error, NSInteger statusCode);
+typedef void(^STErrorBlock)(NSError *error, NSInteger statusCode);
 
 @interface STServerManager : NSObject
 
 + (STServerManager *)sharedManager;
 - (NSURLRequest *)userAuthorizationRequest;
+- (void)getTokenWithCode:(NSString *)code onSuccess:(STTokenBlock)success onFailure:(STErrorBlock)failure;
+- (void)recentPostsFromServerWithPageUrl:(NSString *)url onSuccess:(STPostsDictionaryBlock)success onFailure:(STErrorBlock)failure;
 
-- (void)getTokenWithCode:(NSString *)code
-               onSuccess:(STTokenBlock)success
-               onFailure:(STErrorBlock)failure;
-
-- (void)recentPostsFromServerWithPageUrl:(NSString *)url
-                               onSuccess:(STPostsDictionaryBlock)success
-                               onFailure:(STErrorBlock)failure;
 @end
 
 

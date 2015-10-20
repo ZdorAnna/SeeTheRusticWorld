@@ -12,14 +12,11 @@
 @interface STServerManager ()
 
 @property (nonatomic, strong) AFHTTPRequestOperationManager *requestOperationManager;
-@property (nonatomic, strong) NSString *accessToken;
 
 @end
 
 @implementation STServerManager
-
 static NSString *const kTagsCount  = @"12";
-
 
 + (STServerManager *)sharedManager {
     static STServerManager *manager = nil;
@@ -59,7 +56,7 @@ static NSString *const kTagsCount  = @"12";
 
               if (success) {
                   success (accessToken);
-                  NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+                  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                   [userDefaults setObject:accessToken forKey:STInstagramTokenKey];
                   [userDefaults synchronize];
               }
@@ -81,7 +78,7 @@ static NSString *const kTagsCount  = @"12";
     NSString *accessToken = [userDefaults objectForKey:STInstagramTokenKey];
     
     if (accessToken) {
-        NSDictionary* parameters = @{
+        NSDictionary *parameters = @{
                                      STInstagramTokenKey : accessToken,
                                      @"count"            : kTagsCount
                                      };

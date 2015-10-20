@@ -16,7 +16,6 @@ NSString *const STMainViewControllerIdentifier = @"STMainViewControllerIdentifie
 @interface STMainViewController ()
 
 @property (nonatomic, strong) STContainerViewController *containerViewController;
-@property (nonatomic, assign) BOOL firstTimeAppear;
 
 @end
 

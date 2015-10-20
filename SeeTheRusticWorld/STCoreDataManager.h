@@ -16,7 +16,6 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 + (STCoreDataManager *)sharedManager;
-
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 

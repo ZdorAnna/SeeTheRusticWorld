@@ -10,24 +10,21 @@
 #import "STServerManager.h"
 #import "STCoreDataManager.h"
 #import "STPost.h"
-//#import "STDataManager.h"
 
 #define FETCH_BATCH_SIZE 12
 typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
-
 
 @interface STDataSource ()
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-
 @property (nonatomic, strong) NSMutableArray *tempArray;
+
 @end
 
 @implementation STDataSource
 
 @synthesize managedObjectContext = _managedObjectContext;
-
 
 - (NSManagedObjectContext*) managedObjectContext {
     if (!_managedObjectContext) {
@@ -36,21 +33,17 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
     return _managedObjectContext;
 }
 
-
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         if ([self contentCount] < FETCH_BATCH_SIZE - 1) {
            [self loadNextPage];
-//            self.dataManager = [[STDataManager alloc] init];
-
         }
     }
     return self;
 }
 
-#pragma mark - MSContentManager methods
+#pragma mark - STDataSource methods
 
 - (STPost *)contentAtIndexPath:(NSIndexPath *)indexPath {
     STPost *content = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -66,10 +59,24 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
     }
 }
 
-- (void)addModelWithImageURL:(NSString *)imageURL text:(NSString *)text modelIdentifier:(NSString *)identifier {
-    NSLog(@"addModelWithImageURL");
+- (void)loadNextPage {
+    [self mappingPostsDictionary:^(NSArray *postsArray, NSString *nextPage) {
+        for (int i = 0; i < [postsArray count]; i++) {
+            [self addModelWithImageURL:[postsArray[i] objectForKey:@"imageURL"]
+                                  text:[postsArray[i] objectForKey:@"text"]
+                       modelIdentifier:[postsArray[i] objectForKey:@"identifier"]];
+        }
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject:nextPage forKey:@"nextPageUrl"];
+        [userDefaults synchronize];
+    }];
+}
 
-    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+#pragma mark - Methods
+
+- (void)addModelWithImageURL:(NSString *)imageURL text:(NSString *)text modelIdentifier:(NSString *)identifier {
+
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
     
     NSEntityDescription* description =
     [NSEntityDescription entityForName:@"STPost"
@@ -80,8 +87,8 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(identifier = %@)", identifier];
     [request setPredicate:predicate];
     
-    NSError* requestError = nil;
-    NSArray* resultArray = [self.managedObjectContext executeFetchRequest:request error:&requestError];
+    NSError *requestError = nil;
+    NSArray *resultArray = [self.managedObjectContext executeFetchRequest:request error:&requestError];
     if (requestError) {
         NSLog(@"%@", [requestError localizedDescription]);
     }
@@ -111,31 +118,6 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
             abort();
         }
     }
-}
-
-- (void)loadNextPage {
-    NSLog(@"loadNextPage");
-        
-    [self mappingPostsDictionary:^(NSArray *postsArray, NSString *nextPage) {
-        NSLog(@"%@", [postsArray objectAtIndex:1]);
-        
-
-        for (int i = 0; i < [postsArray count]; i++) {
-            NSLog(@"begin addModel");
-            [self addModelWithImageURL:[postsArray[i] objectForKey:@"imageURL"]
-                                  text:[postsArray[i] objectForKey:@"text"]
-                       modelIdentifier:[postsArray[i] objectForKey:@"identifier"]];
-             
-        }
-        
-
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        [userDefaults setObject:nextPage forKey:@"nextPageUrl"];
-        [userDefaults synchronize];
-        
-        NSLog(@"loadNextPage");
-    }];
-       
 }
 
 -(void)mappingPostsDictionary:(STMappingBlock)completionBlock {
@@ -178,19 +160,16 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
             
             [self.tempArray addObject:dictionaty];
         }
-        NSLog(@"%@", self.tempArray.description);
-
         completionBlock(self.tempArray, nextPageUrl);
         
     } onFailure:^(NSError *error, NSInteger statusCode) {
         completionBlock(nil, nil);
         
     }];
-    
 }
 
-
 #pragma mark - Fetched results controller
+
  - (NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;

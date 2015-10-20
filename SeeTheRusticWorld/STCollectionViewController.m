@@ -10,10 +10,10 @@
 #import "STCollectionViewCell.h"
 #import "STDataSource.h"
 
-
 NSString *const STCollectionViewControllerIdentifier = @"STCollectionViewControllerIdentifier";
+#define MIN_COUNT_CELLS 12
 
-@interface STCollectionViewController ()
+@interface STCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate>   
 
 @end
 
@@ -22,11 +22,6 @@ NSString *const STCollectionViewControllerIdentifier = @"STCollectionViewControl
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataSource = [[STDataSource alloc] init];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    //[self.dataSource loadNextPage];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -43,4 +38,14 @@ NSString *const STCollectionViewControllerIdentifier = @"STCollectionViewControl
     return cell;
 }
 
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([self.dataSource contentCount] >= MIN_COUNT_CELLS) {
+        if (indexPath.row == ([self.dataSource contentCount] )){
+            [self.dataSource loadNextPage];
+        }
+    }
+}
 @end
