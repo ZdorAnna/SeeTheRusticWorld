@@ -8,9 +8,10 @@
 
 #import "STMainViewController.h"
 #import "STContainerViewController.h"
-#import "STServerManager.h"
+#import "STLoginViewController.h"
 
 static NSString *const STEmbedContainer = @"STEmbedContainer";
+NSString *const STMainViewControllerIdentifier = @"STMainViewControllerIdentifier";
 
 @interface STMainViewController ()
 
@@ -23,20 +24,14 @@ static NSString *const STEmbedContainer = @"STEmbedContainer";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.firstTimeAppear = YES;
-
-   }
+}
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    if (self.firstTimeAppear) {
-        self.firstTimeAppear = NO;
-        [[STServerManager sharedManager] authorizeUser];
-    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+
     if ([segue.identifier isEqualToString:STEmbedContainer]) {
         self.containerViewController = segue.destinationViewController;
     }

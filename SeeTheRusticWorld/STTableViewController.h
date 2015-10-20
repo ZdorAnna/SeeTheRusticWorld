@@ -11,7 +11,7 @@
 
 extern NSString *const STTableViewControllerIdentifier;
 
-@interface STTableViewController : UITableViewController
+@interface STTableViewController : UITableViewController 
 
 @property (nonatomic, strong) STDataSource *dataSource;
 

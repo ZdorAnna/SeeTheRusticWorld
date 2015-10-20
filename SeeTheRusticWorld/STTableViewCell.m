@@ -26,18 +26,9 @@ NSString *const STTableViewCellIdentifier = @"STTableViewCellIdentifier";
     
     self.contentText.text = content.text;
     
-   // self.contentImage.image = [UIImage imageNamed:content.imageName];
-    
-    [self.contentImage.image
-     setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:content.imageURL]]
-     placeholderImage:nil
-     success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        // weakCell.contentImage.image = image;
-         //[self layoutSubviews];
-     }
-     failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-         
-     }];
+    NSString *str = [NSString stringWithFormat:@"%@", content.imageURL];
+    NSURL *url = [NSURL URLWithString:str];
+    [self.contentImage setImageWithURL:url];
 }
 
 @end

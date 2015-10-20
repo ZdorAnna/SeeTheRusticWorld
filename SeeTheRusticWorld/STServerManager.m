@@ -7,18 +7,19 @@
 //
 
 #import "STServerManager.h"
-#import "STAccessToken.h"
 #import "AFNetworking.h"
-#import "STLoginViewController.h"
 
 @interface STServerManager ()
 
-@property (strong, nonatomic) AFHTTPRequestOperationManager *requestOperationManager;
-@property (strong, nonatomic) STAccessToken *accessToken;
+@property (nonatomic, strong) AFHTTPRequestOperationManager *requestOperationManager;
+@property (nonatomic, strong) NSString *accessToken;
 
 @end
 
 @implementation STServerManager
+
+static NSString *const kTagsCount  = @"12";
+
 
 + (STServerManager *)sharedManager {
     static STServerManager *manager = nil;
@@ -31,62 +32,91 @@
     return manager;
 }
 
-- (void)authorizeUser {
-    
-    STLoginViewController *vc = [[STLoginViewController alloc]
-                                 initWithCompletionBlock:^(STAccessToken *token) {
-        self.accessToken = token;
-//        if (token) {
-//            
-//        }
-    }];
-    
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    UIViewController *mainVC = [[[[UIApplication sharedApplication] windows] firstObject] rootViewController];
-    
-    [mainVC presentViewController:nav
-                         animated:YES
-                       completion:nil];
-}
-
 - (NSURLRequest *)userAuthorizationRequest {
-    NSString *uriString = [NSString stringWithFormat:@"https://api.instagram.com/oauth/authorize/?client_id=%@&display=touch&basic&redirect_uri=%@&response_type=code", INSTAGRAM_CLIENT_ID, INSTAGRAM_CALLBACK_BASE];
-    
+    NSString *uriString = [NSString stringWithFormat:STInstagramAuthorizationRequestString, STInstagramClientId, STInstagramCallbackString];
     return [NSURLRequest requestWithURL:[NSURL URLWithString:uriString]];
 }
 
-- (void)recentPostsForTagName:(NSString *)tagName
-                        count:(NSUInteger)count
-                     maxTagID:(NSString *)maxTagID
-                    onSuccess:(void(^)(id responseObject))success
-                    onFailure:(void(^)(NSError *error))failure {
+- (void)getTokenWithCode:(NSString *)code
+                     onSuccess:(STTokenBlock)success
+                     onFailure:(STErrorBlock)failure{
+    AFHTTPRequestOperationManager *manager =[AFHTTPRequestOperationManager manager];
+    NSDictionary *parametersDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          code, @"code",
+                                          STInstagramCallbackString, @"redirect_uri",
+                                          @"authorization_code",     @"grant_type",
+                                          STInstagramClientId,       @"client_id",
+                                          STInstagramClientSecret,   @"client_secret",
+                                          nil];
+    [manager POST:STInstagramAccessTokenRequestString
+       parameters:parametersDictionary
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              
+              NSString *accessToken = [responseObject objectForKey:STInstagramTokenKey];
+              NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+              [userDefaults setObject:accessToken forKey:STInstagramTokenKey];
+              [userDefaults synchronize];
+
+              if (success) {
+                  success (accessToken);
+                  NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+                  [userDefaults setObject:accessToken forKey:STInstagramTokenKey];
+                  [userDefaults synchronize];
+              }
+              
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              if (failure) {
+                  failure (error, [error code]);
+              }
+          }];
+}
+
+- (void)recentPostsFromServerWithPageUrl:(NSString *)url
+                               onSuccess:(STPostsDictionaryBlock)success
+                               onFailure:(STErrorBlock)failure {
     
-    NSString *URLString = [NSString stringWithFormat:@"https://api.instagram.com/v1/tags/%@/media/recent", tagName];
     
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     
-    if (self.accessToken) {
-        parameters[@"access_token"] = self.accessToken;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *accessToken = [userDefaults objectForKey:STInstagramTokenKey];
+    
+    if (accessToken) {
+        NSDictionary* parameters = @{
+                                     STInstagramTokenKey : accessToken,
+                                     @"count"            : kTagsCount
+                                     };
+        
+        NSString *URLString = [NSString stringWithFormat:STInstagramPostsRequestString, STInstagramTagName];
+        self.requestOperationManager = [AFHTTPRequestOperationManager manager];
+
+        if (!url) {
+            [self.requestOperationManager GET:URLString
+                                   parameters:parameters
+                                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                          if (success) {
+                                              success(responseObject);
+                                          }
+                                      }
+                                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                          if (failure) {
+                                              failure(error, [error code]);
+                                          }
+                                      }];
+        } else {
+            [self.requestOperationManager GET:url
+                                   parameters:nil
+                                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                          if (success) {
+                                            success(responseObject);
+                                          }
+                                      }
+                                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                          if (failure) {
+                                              failure(error, [error code]);
+                                          }
+                                      }];
+        }
     }
-    parameters[@"count"] = @(count);
-    if (maxTagID) {
-        parameters[@"max_tag_id"] = maxTagID;
-    }
-    
-    self.requestOperationManager = [AFHTTPRequestOperationManager manager];
-    
-    [self.requestOperationManager GET:URLString
-                  parameters:[parameters copy]
-                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                         if (success) {
-                             success(responseObject);
-                         }
-                     }
-                     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                         if (failure) {
-                             failure(error);
-                         }
-                     }];
 }
 
 @end

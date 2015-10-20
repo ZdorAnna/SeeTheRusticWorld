@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+extern NSString *const STMainViewControllerIdentifier;
 
 @interface STMainViewController : UIViewController 
 

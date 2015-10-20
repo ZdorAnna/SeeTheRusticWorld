@@ -1,8 +1,8 @@
 //
-//  STPosts.h
+//  STPost.h
 //  SeeTheRusticWorld
 //
-//  Created by anna on 10/17/15.
+//  Created by anna on 10/20/15.
 //  Copyright (c) 2015 anna. All rights reserved.
 //
 
@@ -12,7 +12,7 @@
 
 @interface STPost : NSManagedObject
 
-@property (nonatomic) NSTimeInterval createdTime;
+@property (nonatomic, retain) NSDate * createdTime;
 @property (nonatomic, retain) NSString * identifier;
 @property (nonatomic, retain) NSString * imageURL;
 @property (nonatomic, retain) NSString * text;

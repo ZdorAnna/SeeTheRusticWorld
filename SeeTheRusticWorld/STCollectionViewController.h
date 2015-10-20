@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class STDataSource;
 
 extern NSString *const STCollectionViewControllerIdentifier;
 
 @interface STCollectionViewController : UICollectionViewController
+
+@property (nonatomic, strong) STDataSource *dataSource;
 
 @end

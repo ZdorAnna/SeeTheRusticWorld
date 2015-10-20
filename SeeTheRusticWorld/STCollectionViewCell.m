@@ -8,6 +8,8 @@
 
 #import "STCollectionViewCell.h"
 #import "STPost.h"
+#import "UIImageView+AFNetworking.h"
+
 
 NSString *const STCollectionViewCellIdentifier = @"STCollectionViewCellIdentifier";
 
@@ -19,8 +21,9 @@ NSString *const STCollectionViewCellIdentifier = @"STCollectionViewCellIdentifie
 
 @implementation STCollectionViewCell
 
-//- (void)setPost:(STPost *)content {
-//    self.contentImage.image = [UIImage imageNamed:content.imageName];
-//}
+- (void)setContent:(STPost *)content {
+    NSString *str = [NSString stringWithFormat:@"%@", content.imageURL];
+    NSURL *url = [NSURL URLWithString:str];
+    [self.contentImage setImageWithURL:url];}
 
 @end

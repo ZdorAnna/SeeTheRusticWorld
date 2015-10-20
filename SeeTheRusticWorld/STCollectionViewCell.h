@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class STPost;
 
 extern NSString *const STCollectionViewCellIdentifier;
 
 @interface STCollectionViewCell : UICollectionViewCell
+
+- (void)setContent:(STPost *)content;
 
 @end

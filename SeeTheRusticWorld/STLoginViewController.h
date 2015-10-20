@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@class STAccessToken;
-
-typedef void(^STLoginCompletionBlock)(STAccessToken *token);
 
 @interface STLoginViewController : UIViewController <UIWebViewDelegate>
 
-- (id)initWithCompletionBlock:(STLoginCompletionBlock)completionBlock;
-
 @end
+
+
+

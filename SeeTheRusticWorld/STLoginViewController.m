@@ -8,26 +8,17 @@
 
 #import "STLoginViewController.h"
 #import "STServerManager.h"
-#import "STAccessToken.h"
-#import "STPost.h"
-#import "AFHTTPRequestOperationManager.h"
+
+#import "STMainViewController.h"
+
 
 @interface STLoginViewController ()
 
-@property (nonatomic, copy) STLoginCompletionBlock completionBlock;
 @property (nonatomic, strong) UIWebView *webView;
 
 @end
 
 @implementation STLoginViewController
-
-- (id)initWithCompletionBlock:(STLoginCompletionBlock)completionBlock {
-    self = [super init];
-    if (self) {
-        self.completionBlock = completionBlock;
-    }
-    return self;
-}
 
 - (void)viewDidLoad {
     self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
@@ -35,13 +26,27 @@
     
     self.webView.delegate = self;
     
-    [self authorize];
-    [self.view addSubview:self.webView];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:STInstagramTokenKey]) {
+        [self displayContainerViewController];
+        
+    } else {
+        [self authorize];
+        [self.view addSubview:self.webView];
+   }
 }
+
+#pragma mark - Methods
 
 - (void)authorize {
     NSURLRequest *request = [[STServerManager sharedManager] userAuthorizationRequest];
     [self.webView loadRequest:request];
+}
+
+- (void) displayContainerViewController {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *nextVC  = [storyboard
+                                 instantiateViewControllerWithIdentifier:STMainViewControllerIdentifier];
+    [self.navigationController pushViewController:nextVC animated:YES];
 }
 
 #pragma mark - UIWebViewDelegete
@@ -66,74 +71,12 @@
             }
         }
         
-        STAccessToken *accessToken = [[STAccessToken alloc] init];
-        AFHTTPRequestOperationManager *manager =[AFHTTPRequestOperationManager manager];
-        NSDictionary *parametersDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   authToken, @"code",
-                                   INSTAGRAM_CALLBACK_BASE, @"redirect_uri",
-                                   @"authorization_code", @"grant_type",
-                                   INSTAGRAM_CLIENT_ID, @"client_id",
-                                   INSTAGRAM_CLIENT_SECRET, @"client_secret",
-                                   nil];
+         [[STServerManager sharedManager] getTokenWithCode:authToken onSuccess:^(NSString *accessToken) {
+             [self displayContainerViewController];
+         } onFailure:^(NSError *error, NSInteger statusCode) {
+             NSLog(@"Error %@", error);
+         }];
         
-        [manager POST:@"https://api.instagram.com/oauth/access_token"
-           parameters:parametersDictionary
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
-                  accessToken.token = [responseObject objectForKey:@"access_token"];
-                  NSLog(@"access_token = %@", [responseObject objectForKey:@"access_token"]);
-                  
-                  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-                  
-                  NSString* url = [NSString stringWithFormat:@"https://api.instagram.com/v1/tags/rustic_world/media/recent?access_token=%@", accessToken.token];
-                  
-                  [manager GET:url
-                    parameters:nil
-                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                          // NSLog(@"JSON: %@", responseObject);
-                           NSArray *data = [responseObject objectForKey:@"data"];
-                           
-                           for (NSDictionary *dict in data) {
-//                               STPosts *post = [[STPosts alloc] initWithServerResponse:dict];
-                            //   NSLog(@"id = %@  text = %@", post.id, post.text);
-                               
-                           }
-                           
-                           //NSDictionary *obj = [data objectAtIndex:0];
-                           
-                           
-//                           //NSDictionary *caption = [obj objectForKey:@"caption"];
-//                           NSString *text = [[obj objectForKey:@"caption"] objectForKey:@"text"];
-//                           NSLog(@"%@", text);
-//                           
-//                           NSString *id = [[obj objectForKey:@"caption"] objectForKey:@"id"];
-//                           
-//                           
-//                           NSDictionary *images = [obj objectForKey:@"images"];
-//                           
-//                           //NSDictionary *low_resolution = ;
-//
-//                           
-//                           NSURL* urlString = [[images objectForKey:@"low_resolution"] objectForKey:@"url"];
-//                           
-//                           
-//                           
-//                           NSLog(@"%@ %@", id, [NSString stringWithFormat:@"%@", urlString]);
-    
-                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                           NSLog(@"Error: %@", error);
-                  }];
-                  
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  NSLog(@"Error: %@", error);
-        }];
-        
-        if (self.completionBlock) {
-            self.completionBlock(accessToken);
-        }
-        
-        [self dismissViewControllerAnimated:YES
-                                 completion:nil];
         return NO;
     }
     return YES;

@@ -14,6 +14,8 @@
 
 - (STPost *)contentAtIndexPath:(NSIndexPath *)indexPath;
 - (NSInteger)contentCount;
-//- (void)saveModelWithImageName:(NSString *)imageName text:(NSString *)text;
+
+- (void)loadNextPage;
+
 
 @end

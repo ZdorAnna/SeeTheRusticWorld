@@ -25,6 +25,7 @@ NSString *const STContainerViewControllerIdentifier = @"STContainerViewControlle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableViewController = [self.storyboard instantiateViewControllerWithIdentifier:STTableViewControllerIdentifier];
+    self.isTableViewControllerVisible = YES;
     [self displayViewController:self.tableViewController];
 }
 
@@ -36,8 +37,7 @@ NSString *const STContainerViewControllerIdentifier = @"STContainerViewControlle
     [viewController didMoveToParentViewController:self];
 }
 
-- (void)changeFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController{
-    
+- (void)changeFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController {
     toViewController.view.frame = [self frameForContentController];
     
     [fromViewController willMoveToParentViewController:nil];

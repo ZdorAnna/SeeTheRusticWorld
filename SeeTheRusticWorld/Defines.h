@@ -8,8 +8,21 @@
 
 
 
-static NSString *const INSTAGRAM_CALLBACK_BASE = @"http://SeeTheRusticWorld/oauth";
-static NSString *const INSTAGRAM_CLIENT_SECRET = @"44b50223058047aaabbf2ef1b6663aac";
-static NSString *const INSTAGRAM_CLIENT_ID  = @"49bff5991ae74c1890a11acb6053db1e";
+static NSString *const STInstagramCallbackString =              @"http://SeeTheRusticWorld/oauth";
+static NSString *const STInstagramClientSecret =                @"44b50223058047aaabbf2ef1b6663aac";
+static NSString *const STInstagramClientId  =                   @"49bff5991ae74c1890a11acb6053db1e";
+
+static NSString * const STInstagramPostsRequestString =         @"https://api.instagram.com/v1/tags/%@/media/recent";
+static NSString * const STInstagramAuthorizationRequestString = @"https://api.instagram.com/oauth/authorize/?client_id=%@&display=touch&basic&redirect_uri=%@&response_type=code";
+static NSString * const STInstagramAccessTokenRequestString =   @"https://api.instagram.com/oauth/access_token";
+
+static NSString * const STInstagramTokenKey =                   @"access_token";
+static NSString * const STInstagramTagName =                    @"rustic_world";
 
 
+static NSInteger const TITaggedPostsPageSize = 33;
+static NSInteger const TIPostsCountLoadingHandicap = 6;
+
+
+//static NSString * const TIInstagramPaginationKey = @"pagination";
+//static NSString * const TIInstagramDataKey = @"data";
