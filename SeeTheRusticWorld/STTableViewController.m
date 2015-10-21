@@ -13,15 +13,19 @@
 NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentifier";
 #define MIN_COUNT_CELLS 12
 
-@interface STTableViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface STTableViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
 @end
 
 @implementation STTableViewController
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    self.dataSource = [[STDataSource alloc] initWithDelegate:self];
+    //[self.tableView reloadData];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dataSource = [[STDataSource alloc] init];
 }
 
 #pragma mark - UITableViewDataSource
@@ -44,9 +48,43 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
     
     if ([self.dataSource contentCount] >= MIN_COUNT_CELLS) {
         if (indexPath.row == ([self.dataSource contentCount] - 1)){
-            [self.dataSource loadNextPage];
+             [self.dataSource loadNextPage];
         }
     }
 }
+
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
+}
+
 
 @end

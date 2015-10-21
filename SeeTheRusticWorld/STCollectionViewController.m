@@ -13,7 +13,7 @@
 NSString *const STCollectionViewControllerIdentifier = @"STCollectionViewControllerIdentifier";
 #define MIN_COUNT_CELLS 12
 
-@interface STCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate>   
+@interface STCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate>
 
 @end
 
@@ -21,7 +21,7 @@ NSString *const STCollectionViewControllerIdentifier = @"STCollectionViewControl
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dataSource = [[STDataSource alloc] init];
+    self.dataSource = [[STDataSource alloc] initWithDelegate:self];
 }
 
 #pragma mark - UICollectionViewDataSource

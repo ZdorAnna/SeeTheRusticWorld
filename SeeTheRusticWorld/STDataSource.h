@@ -12,6 +12,7 @@
 
 @interface STDataSource : NSObject
 
+- (instancetype)initWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate;
 - (STPost *)contentAtIndexPath:(NSIndexPath *)indexPath;
 - (NSInteger)contentCount;
 - (void)loadNextPage;

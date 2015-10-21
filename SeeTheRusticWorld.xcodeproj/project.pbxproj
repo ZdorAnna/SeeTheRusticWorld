@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		950A1BF21BCE5C9600800C2F /* STDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 950A1BF11BCE5C9600800C2F /* STDataSource.m */; };
+		9518B97E1BD78FE500281A26 /* PrefixHeader.pch in Sources */ = {isa = PBXBuildFile; fileRef = 953F8F541BC976EC0074D3E1 /* PrefixHeader.pch */; };
+		953947321BD6CECF0051C475 /* STDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 953947311BD6CECF0051C475 /* STDataManager.m */; };
 		957C2A881BC437F8004D636E /* STLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957C2A871BC437F8004D636E /* STLoginViewController.m */; };
+		958440841BD6A80E0028FD5B /* STPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 958440821BD689680028FD5B /* STPost.m */; };
 		9592DF4B1BC9513100CA2581 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9592DF261BC9513000CA2581 /* AFHTTPRequestOperation.m */; };
 		9592DF4C1BC9513100CA2581 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9592DF281BC9513000CA2581 /* AFHTTPRequestOperationManager.m */; };
 		9592DF4D1BC9513100CA2581 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9592DF2A1BC9513000CA2581 /* AFHTTPSessionManager.m */; };
@@ -39,7 +42,6 @@
 		95BA4E451BBEC5EA00CB9D48 /* STCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BA4E441BBEC5EA00CB9D48 /* STCollectionViewCell.m */; };
 		95BA4E481BBEC60000CB9D48 /* STTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BA4E471BBEC60000CB9D48 /* STTableViewCell.m */; };
 		95BA4E4B1BBEC78500CB9D48 /* STServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BA4E4A1BBEC78500CB9D48 /* STServerManager.m */; };
-		95DCE8131BD4F7E500A31B08 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95DCE8121BD4F7E500A31B08 /* Default-568h@2x.png */; };
 		95DCE8291BD6208800A31B08 /* STPost.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95DCE8271BD6208800A31B08 /* STPost.xcdatamodeld */; };
 		95DCE82A1BD6208800A31B08 /* STPost.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95DCE8271BD6208800A31B08 /* STPost.xcdatamodeld */; };
 /* End PBXBuildFile section */
@@ -58,6 +60,8 @@
 		950A1BF01BCE5C9600800C2F /* STDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDataSource.h; sourceTree = "<group>"; };
 		950A1BF11BCE5C9600800C2F /* STDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDataSource.m; sourceTree = "<group>"; };
 		951353A31BCD6DBE006F86D7 /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
+		953947301BD6CECF0051C475 /* STDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDataManager.h; sourceTree = "<group>"; };
+		953947311BD6CECF0051C475 /* STDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDataManager.m; sourceTree = "<group>"; };
 		953F8F541BC976EC0074D3E1 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = ../PrefixHeader.pch; sourceTree = "<group>"; };
 		957C2A861BC437F8004D636E /* STLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLoginViewController.h; sourceTree = "<group>"; };
 		957C2A871BC437F8004D636E /* STLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLoginViewController.m; sourceTree = "<group>"; };
@@ -127,7 +131,6 @@
 		95BA4E471BBEC60000CB9D48 /* STTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTableViewCell.m; sourceTree = "<group>"; };
 		95BA4E491BBEC78500CB9D48 /* STServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STServerManager.h; sourceTree = "<group>"; };
 		95BA4E4A1BBEC78500CB9D48 /* STServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STServerManager.m; sourceTree = "<group>"; };
-		95DCE8121BD4F7E500A31B08 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		95DCE8281BD6208800A31B08 /* STPost.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = STPost.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +152,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9539472F1BD6CE870051C475 /* Mapping */ = {
+			isa = PBXGroup;
+			children = (
+				953947301BD6CECF0051C475 /* STDataManager.h */,
+				953947311BD6CECF0051C475 /* STDataManager.m */,
+			);
+			name = Mapping;
+			sourceTree = "<group>";
+		};
 		957C2A821BC436F8004D636E /* Test */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,7 +242,6 @@
 		95BA4DC11BBEA81C00CB9D48 = {
 			isa = PBXGroup;
 			children = (
-				95DCE8121BD4F7E500A31B08 /* Default-568h@2x.png */,
 				9592DF231BC9513000CA2581 /* Libs */,
 				95BA4DCC1BBEA81C00CB9D48 /* SeeTheRusticWorld */,
 				95BA4DE91BBEA81C00CB9D48 /* SeeTheRusticWorldTests */,
@@ -252,6 +263,7 @@
 			children = (
 				95BA4DF91BBEA88200CB9D48 /* AppDelegate */,
 				959C21641BD25C06004329D9 /* Server */,
+				9539472F1BD6CE870051C475 /* Mapping */,
 				95BA4E001BBEAC6200CB9D48 /* Data Source */,
 				957C2A821BC436F8004D636E /* Test */,
 				95BA4DF61BBEA82900CB9D48 /* Model */,
@@ -432,7 +444,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				95BA4DDC1BBEA81C00CB9D48 /* Main.storyboard in Resources */,
-				95DCE8131BD4F7E500A31B08 /* Default-568h@2x.png in Resources */,
 				95BA4DE11BBEA81C00CB9D48 /* LaunchScreen.xib in Resources */,
 				95BA4DDE1BBEA81C00CB9D48 /* Images.xcassets in Resources */,
 			);
@@ -472,6 +483,8 @@
 				950A1BF21BCE5C9600800C2F /* STDataSource.m in Sources */,
 				9592DF591BC9513100CA2581 /* UIProgressView+AFNetworking.m in Sources */,
 				9592DF4B1BC9513100CA2581 /* AFHTTPRequestOperation.m in Sources */,
+				953947321BD6CECF0051C475 /* STDataManager.m in Sources */,
+				9518B97E1BD78FE500281A26 /* PrefixHeader.pch in Sources */,
 				9592DF531BC9513100CA2581 /* AFURLSessionManager.m in Sources */,
 				95BA4E3F1BBEBAEA00CB9D48 /* STContainerViewController.m in Sources */,
 				95BA4DD91BBEA81C00CB9D48 /* STTableViewController.m in Sources */,
@@ -481,6 +494,7 @@
 				9592DF511BC9513100CA2581 /* AFURLRequestSerialization.m in Sources */,
 				9592DF571BC9513100CA2581 /* UIButton+AFNetworking.m in Sources */,
 				95BA4E3C1BBEBA9600CB9D48 /* STMainViewController.m in Sources */,
+				958440841BD6A80E0028FD5B /* STPost.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
