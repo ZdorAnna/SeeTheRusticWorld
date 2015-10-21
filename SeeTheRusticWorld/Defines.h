@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 anna. All rights reserved.
 //
 
-
+#warning у этого файла в имени должен быть префикс приложения
 
 static NSString *const STInstagramCallbackString =              @"http://SeeTheRusticWorld/oauth";
 static NSString *const STInstagramClientSecret =                @"44b50223058047aaabbf2ef1b6663aac";
@@ -23,6 +23,6 @@ static NSString * const STInstagramTagName =                    @"rustic_world";
 static NSInteger const TITaggedPostsPageSize = 33;
 static NSInteger const TIPostsCountLoadingHandicap = 6;
 
-
+#warning закомментированные вещи надо удалять
 //static NSString * const TIInstagramPaginationKey = @"pagination";
 //static NSString * const TIInstagramDataKey = @"data";

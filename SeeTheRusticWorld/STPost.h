@@ -14,6 +14,7 @@
 
 @property (nonatomic, retain) NSDate * createdTime;
 @property (nonatomic, retain) NSString * identifier;
+#warning из имени свойства моет показаться, что оно типа NSURL, но это не так. переименуйте свойство
 @property (nonatomic, retain) NSString * imageURL;
 @property (nonatomic, retain) NSString * text;
 

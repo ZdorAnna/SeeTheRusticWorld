@@ -11,6 +11,7 @@
 
 @interface STCoreDataManager : NSObject
 
+#warning в *.h файле необходимо показать только managedObjectContext, и тот только readonly. Остальные свойства используются только внутри класса
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;

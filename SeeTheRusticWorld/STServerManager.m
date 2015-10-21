@@ -84,8 +84,9 @@ static NSString *const kTagsCount  = @"12";
                                      };
         
         NSString *URLString = [NSString stringWithFormat:STInstagramPostsRequestString, STInstagramTagName];
+#warning зачем хранить requestOperationManager в свойстве, если при каждом запросе вы все равно заполняете его из [AFHTTPRequestOperationManager manager]
         self.requestOperationManager = [AFHTTPRequestOperationManager manager];
-
+#warning здесь в if и else жесткая копипаста, различие только в урле. Поэтому правильно будет в if-else определить, на какой урл нужно отправлять запрос, и затем написать логику отправки один раз
         if (!url) {
             [self.requestOperationManager GET:URLString
                                    parameters:parameters

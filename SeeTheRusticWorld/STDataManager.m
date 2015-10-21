@@ -92,6 +92,7 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
     }
 }
 
+#warning неправильное имя метода, оно не отражает происходящее внутри метода
 -(void)mappingPostsDictionary:(STMappingBlock)completionBlock {
     
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];

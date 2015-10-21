@@ -14,6 +14,7 @@
 
 @interface STDataSource ()
 
+#warning вы наверняка замечали, что новые данные после подгрузки из сети автоматически не добавляются в таблицу/коллекшн вью. Так происходит потому, что у fetchedResultsController никогда нет делегата
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, weak) id<NSFetchedResultsControllerDelegate> delegate;
@@ -94,6 +95,7 @@
     if (![self.fetchedResultsController performFetch:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
     }
+     
     return _fetchedResultsController;
 }
 

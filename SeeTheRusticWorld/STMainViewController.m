@@ -21,6 +21,7 @@ NSString *const STMainViewControllerIdentifier = @"STMainViewControllerIdentifie
 
 @implementation STMainViewController
 
+#warning в следующих двух методах нет необходимости
 - (void)viewDidLoad {
     [super viewDidLoad];
 }

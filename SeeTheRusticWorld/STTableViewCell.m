@@ -25,6 +25,7 @@ NSString *const STTableViewCellIdentifier = @"STTableViewCellIdentifier";
 - (void)setContent:(STPost *)content {
     
     self.contentText.text = content.text;
+#warning какой смысл в преобразовании NSString в NSString?
     NSString *str = [NSString stringWithFormat:@"%@", content.imageURL];
     NSURL *url = [NSURL URLWithString:str];
     [self.contentImage setImageWithURL:url];

@@ -21,9 +21,11 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     self.dataSource = [[STDataSource alloc] initWithDelegate:self];
+#warning закомментированный код надо удалять
     //[self.tableView reloadData];
 }
 
+#warning этот метод не нужен
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
@@ -45,7 +47,7 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+#warning два if-а надо объединить в один через логическое И
     if ([self.dataSource contentCount] >= MIN_COUNT_CELLS) {
         if (indexPath.row == ([self.dataSource contentCount] - 1)){
              [self.dataSource loadNextPage];
@@ -70,7 +72,7 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
         case NSFetchedResultsChangeInsert:
             [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
-            
+#warning по остальным чейнджам, кроме инсертов, надо делать хотя бы reloadData
         case NSFetchedResultsChangeDelete:
             break;
             

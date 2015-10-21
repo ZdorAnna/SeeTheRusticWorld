@@ -19,6 +19,7 @@
 @implementation STLoginViewController
 
 - (void)viewDidLoad {
+#warning проще было бы добавить UIWebView в сториборде
     self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     [self.webView setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
     
@@ -70,6 +71,7 @@
         }
         
          [[STServerManager sharedManager] getTokenWithCode:authToken onSuccess:^(NSString *accessToken) {
+#warning внутри блока необходимо использовать weakSelf
              [self displayContainerViewController];
          } onFailure:^(NSError *error, NSInteger statusCode) {
              NSLog(@"Error %@", error);

@@ -45,6 +45,7 @@
     // Saves changes in the application's managed object context before the application terminates.
     [[STCoreDataManager sharedManager] saveContext];
     
+#warning Всю работу с токеном надо спрятать в какой-нибудь tokenManager. И вообще зачем его нилить каждый раз, если можно при следующем запуске вместо логина показывать сразу таблицу. А nextPageUrl используется только в STDataManager, потому может нилиться в его init
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:nil forKey:STInstagramTokenKey];
     [userDefaults setObject:nil forKey:@"nextPageUrl"];
