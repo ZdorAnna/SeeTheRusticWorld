@@ -22,8 +22,9 @@ NSString *const STCollectionViewCellIdentifier = @"STCollectionViewCellIdentifie
 @implementation STCollectionViewCell
 
 - (void)setContent:(STPost *)content {
-    NSString *str = [NSString stringWithFormat:@"%@", content.imageURL];
-    NSURL *url = [NSURL URLWithString:str];
-    [self.contentImage setImageWithURL:url];}
+    
+    NSURL *url = [NSURL URLWithString:content.imageUrlString];
+    [self.contentImage setImageWithURL:url];
+}
 
 @end

@@ -12,19 +12,14 @@
 
 @interface STLoginViewController ()
 
-@property (nonatomic, strong) UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
 
 @implementation STLoginViewController
 
 - (void)viewDidLoad {
-#warning проще было бы добавить UIWebView в сториборде
-    self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-    [self.webView setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
-    
-    self.webView.delegate = self;
-    
+        
     if ([[NSUserDefaults standardUserDefaults] objectForKey:STInstagramTokenKey]) {
         [self displayContainerViewController];
         
@@ -70,7 +65,7 @@
             }
         }
         
-         [[STServerManager sharedManager] getTokenWithCode:authToken onSuccess:^(NSString *accessToken) {
+         [[STServerManager sharedManager] requestTokenWithCode:authToken onSuccess:^(NSString *accessToken) {
 #warning внутри блока необходимо использовать weakSelf
              [self displayContainerViewController];
          } onFailure:^(NSError *error, NSInteger statusCode) {

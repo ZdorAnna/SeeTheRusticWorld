@@ -90,6 +90,8 @@
                                                              managedObjectContext:self.managedObjectContext
                                                              sectionNameKeyPath:nil
                                                              cacheName:nil];
+     self.fetchedResultsController.delegate = self.delegate;
+
     
     NSError *error = nil;
     if (![self.fetchedResultsController performFetch:&error]) {

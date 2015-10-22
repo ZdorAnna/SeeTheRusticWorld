@@ -21,15 +21,6 @@ NSString *const STMainViewControllerIdentifier = @"STMainViewControllerIdentifie
 
 @implementation STMainViewController
 
-#warning в следующих двух методах нет необходимости
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
     if ([segue.identifier isEqualToString:STEmbedContainer]) {

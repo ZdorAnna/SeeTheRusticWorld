@@ -35,9 +35,9 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
 - (void)loadNextPage {
     [self mappingPostsDictionary:^(NSArray *postsArray, NSString *nextPage) {
         for (int i = 0; i < [postsArray count]; i++) {
-            [self insertModelWithImageURL:[postsArray[i] objectForKey:@"imageURL"]
-                                  text:[postsArray[i] objectForKey:@"text"]
-                       modelIdentifier:[postsArray[i] objectForKey:@"identifier"]];
+            [self insertModelWithImageURL:[postsArray[i] objectForKey:@"imageUrlString"]
+                                     text:[postsArray[i] objectForKey:@"text"]
+                          modelIdentifier:[postsArray[i] objectForKey:@"identifier"]];
         }
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:nextPage forKey:@"nextPageUrl"];
@@ -47,7 +47,7 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
 
 #pragma mark - Methods
 
-- (void)insertModelWithImageURL:(NSString *)imageURL text:(NSString *)text modelIdentifier:(NSString *)identifier {
+- (void)insertModelWithImageURL:(NSString *)imageUrlString text:(NSString *)text modelIdentifier:(NSString *)identifier {
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     
@@ -68,7 +68,7 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
     if ([resultArray count] > 0) {
         STPost *post= resultArray[0];
         post.text = text;
-        post.imageURL = imageURL;
+        post.imageUrlString = imageUrlString;
         post.createdTime = [NSDate date];
         
         [post.managedObjectContext save:nil];
@@ -79,7 +79,7 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
                                                                           inManagedObjectContext:context];
         
         [newManagedObject setValue:text forKey:@"text"];
-        [newManagedObject setValue:imageURL forKey:@"imageURL"];
+        [newManagedObject setValue:imageUrlString forKey:@"imageUrlString"];
         [newManagedObject setValue:identifier forKey:@"identifier"];
         [newManagedObject setValue:[NSDate date] forKey:@"createdTime"];
         
@@ -100,7 +100,7 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *url = [userDefaults objectForKey:@"nextPageUrl"];
     
-    [[STServerManager sharedManager] recentPostsFromServerWithPageUrl:url onSuccess:^(NSDictionary *posts) {
+    [[STServerManager sharedManager] requestRecentPostsFromServerWithPageUrl:url onSuccess:^(NSDictionary *posts) {
         
         NSDictionary *dict = [posts objectForKey:@"pagination"];
         NSString *nextPageUrl = [dict objectForKey:@"next_url"];
@@ -122,12 +122,12 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
             
             NSDictionary *imageDictionary = [dict objectForKey:@"images"];
             NSDictionary *standardResolutionDict = [imageDictionary objectForKey:@"standard_resolution"];
-            NSString *imageURL = [standardResolutionDict objectForKey:@"url"];
+            NSString *imageUrlString = [standardResolutionDict objectForKey:@"url"];
             
             NSDictionary *dictionaty = @{
-                                         @"text"         : text,
-                                         @"imageURL"     : imageURL,
-                                         @"identifier"   : identifier
+                                         @"text"               : text,
+                                         @"imageUrlString"     : imageUrlString,
+                                         @"identifier"         : identifier
                                          };
             
             [tempArray addObject:dictionaty];

@@ -16,10 +16,8 @@ typedef void(^STErrorBlock)(NSError *error, NSInteger statusCode);
 
 + (STServerManager *)sharedManager;
 - (NSURLRequest *)userAuthorizationRequest;
-#warning get подходит для мгновенных операций, для запросов лучше испольщовать "load" или "request"
-- (void)getTokenWithCode:(NSString *)code onSuccess:(STTokenBlock)success onFailure:(STErrorBlock)failure;
-#warning здесь нужен префикс "load" или "request"
-- (void)recentPostsFromServerWithPageUrl:(NSString *)url onSuccess:(STPostsDictionaryBlock)success onFailure:(STErrorBlock)failure;
+- (void)requestTokenWithCode:(NSString *)code onSuccess:(STTokenBlock)success onFailure:(STErrorBlock)failure;
+- (void)requestRecentPostsFromServerWithPageUrl:(NSString *)url onSuccess:(STPostsDictionaryBlock)success onFailure:(STErrorBlock)failure;
 
 @end
 

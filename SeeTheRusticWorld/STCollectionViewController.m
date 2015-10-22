@@ -13,7 +13,6 @@
 NSString *const STCollectionViewControllerIdentifier = @"STCollectionViewControllerIdentifier";
 #define MIN_COUNT_CELLS 12
 
-#warning как этот контроллер будет реагировать на изменения внутри выборки NSFetchedResultsController, если он не реализовал ниодного метода из протокола NSFetchedResultsControllerDelegate?
 @interface STCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate>
 
 @end
@@ -42,11 +41,38 @@ NSString *const STCollectionViewControllerIdentifier = @"STCollectionViewControl
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-#warning здесь такое же замечание, как и в табличном контроллере?
-    if ([self.dataSource contentCount] >= MIN_COUNT_CELLS) {
-        if (indexPath.row == ([self.dataSource contentCount] )){
-            [self.dataSource loadNextPage];
-        }
+    
+    if (([self.dataSource contentCount] >= MIN_COUNT_CELLS) ||
+        (indexPath.row == ([self.dataSource contentCount] - 1))) {
+        
+        [self.dataSource loadNextPage];
     }
 }
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    UICollectionView *collectionView = self.collectionView;
+    
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+            break;
+        case NSFetchedResultsChangeDelete:
+            //[collectionView reloadData];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            //[collectionView reloadData];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+           // [collectionView reloadData];
+            break;
+    }
+}
+
 @end

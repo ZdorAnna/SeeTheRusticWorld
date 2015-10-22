@@ -34,7 +34,7 @@ static NSString *const kTagsCount  = @"12";
     return [NSURLRequest requestWithURL:[NSURL URLWithString:uriString]];
 }
 
-- (void)getTokenWithCode:(NSString *)code
+- (void)requestTokenWithCode:(NSString *)code
                      onSuccess:(STTokenBlock)success
                      onFailure:(STErrorBlock)failure{
     AFHTTPRequestOperationManager *manager =[AFHTTPRequestOperationManager manager];
@@ -68,7 +68,7 @@ static NSString *const kTagsCount  = @"12";
           }];
 }
 
-- (void)recentPostsFromServerWithPageUrl:(NSString *)url
+- (void)requestRecentPostsFromServerWithPageUrl:(NSString *)url
                                onSuccess:(STPostsDictionaryBlock)success
                                onFailure:(STErrorBlock)failure {
     

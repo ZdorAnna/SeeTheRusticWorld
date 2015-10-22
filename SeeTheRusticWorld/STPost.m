@@ -2,7 +2,7 @@
 //  STPost.m
 //  SeeTheRusticWorld
 //
-//  Created by anna on 10/20/15.
+//  Created by anna on 10/22/15.
 //  Copyright (c) 2015 anna. All rights reserved.
 //
 
@@ -13,7 +13,7 @@
 
 @dynamic createdTime;
 @dynamic identifier;
-@dynamic imageURL;
+@dynamic imageUrlString;
 @dynamic text;
 
 @end

@@ -8,12 +8,16 @@
 
 #import "STCoreDataManager.h"
 
+@interface STCoreDataManager ()
+
+@property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+@end
+
 @implementation STCoreDataManager
 
-#warning synthesize можно не писать
 @synthesize managedObjectContext = _managedObjectContext;
-@synthesize managedObjectModel = _managedObjectModel;
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 + (STCoreDataManager *)sharedManager {
     static STCoreDataManager *manager = nil;
@@ -71,7 +75,7 @@
         // Replace this with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+       // abort();
     }
     
     return _persistentStoreCoordinator;
