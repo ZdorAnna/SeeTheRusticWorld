@@ -33,7 +33,7 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
 }
 
 - (void)loadNextPage {
-    [self mappingPostsDictionary:^(NSArray *postsArray, NSString *nextPage) {
+    [self parsingResponseToPostsArray:^(NSArray *postsArray, NSString *nextPage) {
         for (int i = 0; i < [postsArray count]; i++) {
             [self insertModelWithImageURL:[postsArray[i] objectForKey:@"imageUrlString"]
                                      text:[postsArray[i] objectForKey:@"text"]
@@ -92,8 +92,7 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
     }
 }
 
-#warning неправильное имя метода, оно не отражает происходящее внутри метода
--(void)mappingPostsDictionary:(STMappingBlock)completionBlock {
+-(void)parsingResponseToPostsArray:(STMappingBlock)completionBlock {
     
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     

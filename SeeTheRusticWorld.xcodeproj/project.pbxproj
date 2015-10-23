@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		950A1BF21BCE5C9600800C2F /* STDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 950A1BF11BCE5C9600800C2F /* STDataSource.m */; };
-		9518B97E1BD78FE500281A26 /* PrefixHeader.pch in Sources */ = {isa = PBXBuildFile; fileRef = 953F8F541BC976EC0074D3E1 /* PrefixHeader.pch */; };
 		953947321BD6CECF0051C475 /* STDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 953947311BD6CECF0051C475 /* STDataManager.m */; };
 		955C06BB1BD8C40D0097F882 /* STPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 955C06BA1BD8C40D0097F882 /* STPost.m */; };
 		957C2A881BC437F8004D636E /* STLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957C2A871BC437F8004D636E /* STLoginViewController.m */; };
@@ -485,7 +484,6 @@
 				9592DF591BC9513100CA2581 /* UIProgressView+AFNetworking.m in Sources */,
 				9592DF4B1BC9513100CA2581 /* AFHTTPRequestOperation.m in Sources */,
 				953947321BD6CECF0051C475 /* STDataManager.m in Sources */,
-				9518B97E1BD78FE500281A26 /* PrefixHeader.pch in Sources */,
 				9592DF531BC9513100CA2581 /* AFURLSessionManager.m in Sources */,
 				95BA4E3F1BBEBAEA00CB9D48 /* STContainerViewController.m in Sources */,
 				95BA4DD91BBEA81C00CB9D48 /* STTableViewController.m in Sources */,

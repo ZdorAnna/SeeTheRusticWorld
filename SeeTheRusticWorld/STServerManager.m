@@ -9,14 +9,8 @@
 #import "STServerManager.h"
 #import "AFNetworking.h"
 
-@interface STServerManager ()
-
-@property (nonatomic, strong) AFHTTPRequestOperationManager *requestOperationManager;
-
-@end
-
 @implementation STServerManager
-static NSString *const kTagsCount  = @"12";
+static NSString *const kTagsCount  = @"33";
 
 + (STServerManager *)sharedManager {
     static STServerManager *manager = nil;
@@ -72,48 +66,38 @@ static NSString *const kTagsCount  = @"12";
                                onSuccess:(STPostsDictionaryBlock)success
                                onFailure:(STErrorBlock)failure {
     
-    
-    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *accessToken = [userDefaults objectForKey:STInstagramTokenKey];
     
     if (accessToken) {
-        NSDictionary *parameters = @{
-                                     STInstagramTokenKey : accessToken,
-                                     @"count"            : kTagsCount
-                                     };
+        NSDictionary *parameters = [NSDictionary new];
+        NSString *URLString;
         
-        NSString *URLString = [NSString stringWithFormat:STInstagramPostsRequestString, STInstagramTagName];
-#warning зачем хранить requestOperationManager в свойстве, если при каждом запросе вы все равно заполняете его из [AFHTTPRequestOperationManager manager]
-        self.requestOperationManager = [AFHTTPRequestOperationManager manager];
-#warning здесь в if и else жесткая копипаста, различие только в урле. Поэтому правильно будет в if-else определить, на какой урл нужно отправлять запрос, и затем написать логику отправки один раз
         if (!url) {
-            [self.requestOperationManager GET:URLString
-                                   parameters:parameters
-                                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                          if (success) {
-                                              success(responseObject);
-                                          }
-                                      }
-                                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                          if (failure) {
-                                              failure(error, [error code]);
-                                          }
-                                      }];
+            parameters = @{
+                           STInstagramTokenKey : accessToken,
+                           @"count"            : kTagsCount
+                           };
+            URLString = [NSString stringWithFormat:STInstagramPostsRequestString, STInstagramTagName];
+            
         } else {
-            [self.requestOperationManager GET:url
-                                   parameters:nil
-                                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                          if (success) {
-                                            success(responseObject);
-                                          }
-                                      }
-                                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                          if (failure) {
-                                              failure(error, [error code]);
-                                          }
-                                      }];
+            parameters = nil;
+            URLString = url;
         }
+
+        AFHTTPRequestOperationManager *requestOperationManager = [AFHTTPRequestOperationManager manager];
+        [requestOperationManager GET:URLString
+                          parameters:parameters
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 if (success) {
+                                     success(responseObject);
+                                 }
+                             }
+                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 if (failure) {
+                                     failure(error, [error code]);
+                                 }
+                             }];
     }
 }
 

@@ -57,7 +57,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kci-jh-rVR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="602" y="-820"/>
+            <point key="canvasLocation" x="588" y="-820"/>
         </scene>
         <!--See the Rustic World-->
         <scene sceneID="ZGi-L6-kTn">
@@ -98,7 +98,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WVa-s8-k6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="166" y="-2"/>
+            <point key="canvasLocation" x="-102" y="-92"/>
         </scene>
         <!--Container View Controller-->
         <scene sceneID="JFP-fj-AMH">
@@ -117,7 +117,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MVn-hm-ueT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="990" y="-13.732394366197182"/>
+            <point key="canvasLocation" x="588" y="-92"/>
         </scene>
         <!--See The Rustic World-->
         <scene sceneID="cHh-p3-d0I">
@@ -138,26 +138,26 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GSp-WW-aby">
-                                            <rect key="frame" x="1" y="1" width="97" height="97"/>
+                                            <rect key="frame" x="10" y="1" width="97" height="97"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="GSp-WW-aby" secondAttribute="height" multiplier="1:1" id="81o-aU-4aq"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" lineBreakMode="tailTruncation" numberOfLines="14" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gET-xc-4ho">
-                                            <rect key="frame" x="106" y="1" width="489" height="97"/>
+                                            <rect key="frame" x="115" y="1" width="475" height="97"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="0.36454387630000001" green="0.36454387630000001" blue="0.36454387630000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="GSp-WW-aby" firstAttribute="leading" secondItem="zUL-q8-Dgi" secondAttribute="leading" constant="1" id="4G3-XT-cnz"/>
+                                        <constraint firstItem="GSp-WW-aby" firstAttribute="leading" secondItem="zUL-q8-Dgi" secondAttribute="leading" constant="10" id="4G3-XT-cnz"/>
                                         <constraint firstAttribute="bottom" secondItem="gET-xc-4ho" secondAttribute="bottom" constant="1" id="5NH-Dh-pt9"/>
                                         <constraint firstItem="GSp-WW-aby" firstAttribute="top" secondItem="zUL-q8-Dgi" secondAttribute="top" constant="1" id="E2Z-Gg-Xqo"/>
                                         <constraint firstAttribute="bottom" secondItem="GSp-WW-aby" secondAttribute="bottom" constant="1" id="Hkq-lz-0Z7"/>
                                         <constraint firstItem="GSp-WW-aby" firstAttribute="bottom" secondItem="gET-xc-4ho" secondAttribute="bottom" id="Kgf-jb-G09"/>
                                         <constraint firstItem="GSp-WW-aby" firstAttribute="top" secondItem="gET-xc-4ho" secondAttribute="top" id="V6h-Fa-DqJ"/>
-                                        <constraint firstAttribute="trailing" secondItem="gET-xc-4ho" secondAttribute="trailing" constant="5" id="ZGO-va-dsO"/>
+                                        <constraint firstAttribute="trailing" secondItem="gET-xc-4ho" secondAttribute="trailing" constant="10" id="ZGO-va-dsO"/>
                                         <constraint firstItem="gET-xc-4ho" firstAttribute="top" secondItem="zUL-q8-Dgi" secondAttribute="top" constant="1" id="bIP-h5-aIJ"/>
                                         <constraint firstItem="gET-xc-4ho" firstAttribute="leading" secondItem="GSp-WW-aby" secondAttribute="trailing" constant="8" id="baX-EZ-NDc"/>
                                     </constraints>
@@ -177,7 +177,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zyb-9r-hD6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1967" y="321"/>
+            <point key="canvasLocation" x="1385" y="264"/>
         </scene>
         <!--Collection View Controller-->
         <scene sceneID="Rma-WR-ZoB">
@@ -186,12 +186,12 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Ioz-gY-ULU">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="15" id="NTH-tC-MRC">
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="12" minimumInteritemSpacing="12" id="NTH-tC-MRC">
                             <size key="itemSize" width="90" height="90"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="5" minY="10" maxX="5" maxY="0.0"/>
+                            <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="STCollectionViewCellIdentifier" id="kzf-62-Gt6" customClass="STCollectionViewCell">
@@ -226,7 +226,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1967.9999999999998" y="-402.99999999999994"/>
+            <point key="canvasLocation" x="1385" y="-448"/>
         </scene>
     </scenes>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -24,7 +24,21 @@ NSString *const STCollectionViewCellIdentifier = @"STCollectionViewCellIdentifie
 - (void)setContent:(STPost *)content {
     
     NSURL *url = [NSURL URLWithString:content.imageUrlString];
-    [self.contentImage setImageWithURL:url];
+    NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    
+    __weak typeof(self) weakSelf = self;
+    self.contentImage.image = nil;
+    
+    [self.contentImage
+     setImageWithURLRequest:request
+     placeholderImage:nil
+     success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+         weakSelf.contentImage.image = image;
+         [weakSelf layoutSubviews];
+     }
+     failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+         
+     }];
 }
 
 @end

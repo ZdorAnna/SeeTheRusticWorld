@@ -11,7 +11,7 @@
 #import "STDataSource.h"
 
 NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentifier";
-#define MIN_COUNT_CELLS 12
+#define MIN_COUNT_CELLS 33
 
 @interface STTableViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
@@ -33,6 +33,11 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
     
     STTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:STTableViewCellIdentifier
                                                             forIndexPath:indexPath];
+    
+    if (!cell) {
+        cell = [[STTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:STTableViewCellIdentifier];
+    }
+    
     [cell setContent:[self.dataSource contentAtIndexPath:indexPath]];
     return cell;
 }
@@ -41,10 +46,7 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (([self.dataSource contentCount] >= MIN_COUNT_CELLS) ||
-        (indexPath.row == ([self.dataSource contentCount]))) {
-        
-             [self.dataSource loadNextPage];
+    if (([self.dataSource contentCount] >= MIN_COUNT_CELLS) && (indexPath.row == ([self.dataSource contentCount] - 6))) {       [self.dataSource loadNextPage];
     }
 }
 
@@ -66,15 +68,15 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
             [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
         case NSFetchedResultsChangeDelete:
-            //[tableView reloadData];
+            [tableView reloadData];
             break;
             
         case NSFetchedResultsChangeUpdate:
-            //[tableView reloadData];
+            [tableView reloadData];
             break;
             
         case NSFetchedResultsChangeMove:
-            //[tableView reloadData];
+            [tableView reloadData];
             break;
     }
 }

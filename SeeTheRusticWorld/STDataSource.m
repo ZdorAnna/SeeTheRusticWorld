@@ -10,11 +10,10 @@
 #import "STCoreDataManager.h"
 #import "STDataManager.h"
 
-#define FETCH_BATCH_SIZE 11
+#define FETCH_BATCH_SIZE 33
 
 @interface STDataSource ()
 
-#warning вы наверняка замечали, что новые данные после подгрузки из сети автоматически не добавляются в таблицу/коллекшн вью. Так происходит потому, что у fetchedResultsController никогда нет делегата
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, weak) id<NSFetchedResultsControllerDelegate> delegate;
@@ -40,6 +39,7 @@
         self.delegate = delegate;
         if ([self contentCount] < FETCH_BATCH_SIZE - 1) {
             [self loadNextPage];
+           // NSLog(@"weakSelf");
         }
     }
     return self;
@@ -80,7 +80,7 @@
     [fetchRequest setEntity:entity];
     [fetchRequest setFetchBatchSize:FETCH_BATCH_SIZE];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdTime" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdTime" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];

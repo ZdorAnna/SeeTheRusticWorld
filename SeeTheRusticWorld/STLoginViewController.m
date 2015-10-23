@@ -65,9 +65,10 @@
             }
         }
         
+        __weak typeof(self) weakSelf = self;
+
          [[STServerManager sharedManager] requestTokenWithCode:authToken onSuccess:^(NSString *accessToken) {
-#warning внутри блока необходимо использовать weakSelf
-             [self displayContainerViewController];
+             [weakSelf displayContainerViewController];
          } onFailure:^(NSError *error, NSInteger statusCode) {
              NSLog(@"Error %@", error);
          }];
