@@ -39,7 +39,6 @@
         self.delegate = delegate;
         if ([self contentCount] < FETCH_BATCH_SIZE - 1) {
             [self loadNextPage];
-           // NSLog(@"weakSelf");
         }
     }
     return self;
