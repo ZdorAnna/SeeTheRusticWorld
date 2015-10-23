@@ -15,6 +15,7 @@
 
 + (STCoreDataManager *)sharedManager;
 - (void)saveContext;
+#warning этот метод никем "снаружи" не используется
 - (NSURL *)applicationDocumentsDirectory;
 
 @end

@@ -60,6 +60,7 @@
 }
 
 - (void)loadNextPage {
+#warning выравнивание "уехало"
         STDataManager *dataManager = [[STDataManager alloc] initWithFetchResultController:self.fetchedResultsController
                                                                      managedObjectContext:self.managedObjectContext];
         [dataManager loadNextPage];
@@ -68,8 +69,9 @@
 
 #pragma mark - Fetched results controller
 
+#warning и здесь выравнивание местами уехало
  - (NSFetchedResultsController *)fetchedResultsController {
-     
+
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }

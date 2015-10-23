@@ -34,6 +34,7 @@ NSString *const STCollectionViewCellIdentifier = @"STCollectionViewCellIdentifie
      placeholderImage:nil
      success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
          weakSelf.contentImage.image = image;
+#warning зачем здесь нужен вызов layoutSubviews? Вообще достаточно метода setImageWithURL:
          [weakSelf layoutSubviews];
      }
      failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {

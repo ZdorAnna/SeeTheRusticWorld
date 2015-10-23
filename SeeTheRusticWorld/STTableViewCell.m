@@ -37,6 +37,7 @@ NSString *const STTableViewCellIdentifier = @"STTableViewCellIdentifier";
      placeholderImage:nil
      success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
          weakSelf.contentImage.image = image;
+#warning здесь то же замечание, что и в collectionviewcell
          [weakSelf layoutSubviews];
      }
      failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {

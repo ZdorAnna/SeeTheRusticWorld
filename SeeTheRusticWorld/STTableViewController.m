@@ -46,7 +46,8 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (([self.dataSource contentCount] >= MIN_COUNT_CELLS) && (indexPath.row == ([self.dataSource contentCount] - 6))) {       [self.dataSource loadNextPage];
+    if (([self.dataSource contentCount] >= MIN_COUNT_CELLS) && (indexPath.row == ([self.dataSource contentCount] - 6))) {
+        [self.dataSource loadNextPage];
     }
 }
 
