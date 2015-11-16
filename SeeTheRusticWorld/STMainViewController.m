@@ -22,7 +22,6 @@ NSString *const STMainViewControllerIdentifier = @"STMainViewControllerIdentifie
 @implementation STMainViewController
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
     if ([segue.identifier isEqualToString:STEmbedContainer]) {
         self.containerViewController = segue.destinationViewController;
     }

@@ -32,7 +32,7 @@
 
 - (void)requestTokenWithCode:(NSString *)code
                      onSuccess:(STTokenBlock)success
-                     onFailure:(STErrorBlock)failure{
+                     onFailure:(STErrorBlock)failure {
     AFHTTPRequestOperationManager *manager =[AFHTTPRequestOperationManager manager];
     NSDictionary *parametersDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                           code,                      @"code",

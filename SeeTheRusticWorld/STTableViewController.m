@@ -23,7 +23,7 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 @end
 
 @implementation STTableViewController
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     self.dataSource = [[STDataSource alloc] initWithDelegate:self];
 }
