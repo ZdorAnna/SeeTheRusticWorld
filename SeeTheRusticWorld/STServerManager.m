@@ -77,7 +77,7 @@
         if (!url) {
             parameters = @{
                            STInstagramTokenKey : accessToken,
-                           @"count"            : STCountPostsInRequest
+                           @"count"            : [NSString stringWithFormat:@"%lu", STCountPostsInRequest]
                            };
             URLString = [NSString stringWithFormat:STInstagramPostsRequestString, STInstagramTagName];
             

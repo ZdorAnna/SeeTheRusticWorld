@@ -47,7 +47,10 @@ NSString *const STCollectionViewControllerIdentifier = @"STCollectionViewControl
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell
     forItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (([self.dataSource contentCount] >= FETCH_BATCH_SIZE) && (indexPath.row == ([self.dataSource contentCount] - 6))) {
+    BOOL isLastCell = (indexPath.row == ([self.dataSource contentCount] - STCountElementsToLoadMore));
+    BOOL isMoreContent = ([self.dataSource contentCount] >= STCountPostsInRequest);
+    
+    if (isMoreContent && isLastCell) {
         [self.dataSource loadNextPage];
     }
 }

@@ -18,8 +18,9 @@ static NSString * const STInstagramAccessTokenRequestString =   @"https://api.in
 static NSString * const STInstagramTokenKey =                   @"access_token";
 static NSString * const STInstagramTagName =                    @"rustic_world";
 
-#define FETCH_BATCH_SIZE 33
-static NSString * const STCountPostsInRequest =                 @"33";
+static NSInteger const STCountPostsInRequest =                  33;
+static NSInteger const STCountElementsToLoadMore =              6;
+
 
 
 

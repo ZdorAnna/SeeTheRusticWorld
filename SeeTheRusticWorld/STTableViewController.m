@@ -51,11 +51,13 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell
 forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (([self.dataSource contentCount] >= FETCH_BATCH_SIZE) && (indexPath.row == ([self.dataSource contentCount] - 6))) {
+    BOOL isLastCell = (indexPath.row == ([self.dataSource contentCount] - STCountElementsToLoadMore));
+    BOOL isMoreContent = ([self.dataSource contentCount] >= STCountPostsInRequest);
+    
+    if (isMoreContent && isLastCell) {
         [self.dataSource loadNextPage];
     }
 }
-
 
 #pragma mark - NSFetchedResultsControllerDelegate
 

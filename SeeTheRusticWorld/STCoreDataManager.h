@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+
+@class NSManagedObjectContext;
 
 @interface STCoreDataManager : NSObject
 

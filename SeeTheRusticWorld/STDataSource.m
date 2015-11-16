@@ -21,15 +21,13 @@
 
 @implementation STDataSource
 
-@synthesize managedObjectContext = _managedObjectContext;
-
 #pragma mark - STDataSource methods
 
 - (instancetype)initWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate {
     self = [self init];
     if (self) {
         self.delegate = delegate;
-        if ([self contentCount] < FETCH_BATCH_SIZE - 1) {
+        if ([self contentCount] < STCountPostsInRequest - 1) {
             [self loadNextPage];
         }
     }
@@ -74,7 +72,7 @@
                                               inManagedObjectContext:self.managedObjectContext];
      
     [fetchRequest setEntity:entity];
-    [fetchRequest setFetchBatchSize:FETCH_BATCH_SIZE];
+    [fetchRequest setFetchBatchSize:STCountPostsInRequest];
     
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdTime" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];
