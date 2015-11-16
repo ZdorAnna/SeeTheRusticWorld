@@ -9,6 +9,7 @@
 #import "STLoginViewController.h"
 #import "STServerManager.h"
 #import "STMainViewController.h"
+#import "STDefines.h"
 
 @interface STLoginViewController ()
 
@@ -19,7 +20,6 @@
 @implementation STLoginViewController
 
 - (void)viewDidLoad {
-        
     if ([[NSUserDefaults standardUserDefaults] objectForKey:STInstagramTokenKey]) {
         [self displayContainerViewController];
         
@@ -45,9 +45,9 @@
 
 #pragma mark - UIWebViewDelegete
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    
-    if ([[[request URL] description] rangeOfString:@"code="].location != NSNotFound) {
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
+ navigationType:(UIWebViewNavigationType)navigationType {
+        if ([[[request URL] description] rangeOfString:@"code="].location != NSNotFound) {
         
         NSString *authToken;
         NSString *query = [[request URL] description];
@@ -64,7 +64,6 @@
                authToken = [values lastObject];
             }
         }
-        
         __weak typeof(self) weakSelf = self;
 
          [[STServerManager sharedManager] requestTokenWithCode:authToken onSuccess:^(NSString *accessToken) {

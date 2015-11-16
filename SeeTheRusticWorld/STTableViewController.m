@@ -13,7 +13,12 @@
 
 NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentifier";
 
-@interface STTableViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
+@interface STTableViewController ()
+<
+    UITableViewDataSource,
+    UITableViewDelegate,
+    NSFetchedResultsControllerDelegate
+>
 
 @end
 
@@ -30,12 +35,12 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     STTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:STTableViewCellIdentifier
                                                             forIndexPath:indexPath];
     
     if (!cell) {
-        cell = [[STTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:STTableViewCellIdentifier];
+        cell = [[STTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:STTableViewCellIdentifier];
     }
     
     [cell setContent:[self.dataSource contentAtIndexPath:indexPath]];
@@ -44,9 +49,10 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (([self.dataSource contentCount] >= FETCH_BATCH_SIZE) && (indexPath.row == ([self.dataSource contentCount] - 6))) {       [self.dataSource loadNextPage];
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell
+forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (([self.dataSource contentCount] >= FETCH_BATCH_SIZE) && (indexPath.row == ([self.dataSource contentCount] - 6))) {
+        [self.dataSource loadNextPage];
     }
 }
 

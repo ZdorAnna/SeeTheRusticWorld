@@ -11,7 +11,7 @@
 
 @interface STCoreDataManager : NSObject
 
-@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
 
 + (STCoreDataManager *)sharedManager;
 - (void)saveContext;

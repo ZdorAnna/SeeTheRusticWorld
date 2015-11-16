@@ -25,7 +25,8 @@
 }
 
 - (NSURLRequest *)userAuthorizationRequest {
-    NSString *uriString = [NSString stringWithFormat:STInstagramAuthorizationRequestString, STInstagramClientId, STInstagramCallbackString];
+    NSString *uriString = [NSString stringWithFormat:STInstagramAuthorizationRequestString, STInstagramClientId,
+                           STInstagramCallbackString];
     return [NSURLRequest requestWithURL:[NSURL URLWithString:uriString]];
 }
 
@@ -34,7 +35,7 @@
                      onFailure:(STErrorBlock)failure{
     AFHTTPRequestOperationManager *manager =[AFHTTPRequestOperationManager manager];
     NSDictionary *parametersDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                          code, @"code",
+                                          code,                      @"code",
                                           STInstagramCallbackString, @"redirect_uri",
                                           @"authorization_code",     @"grant_type",
                                           STInstagramClientId,       @"client_id",
@@ -64,9 +65,8 @@
 }
 
 - (void)requestRecentPostsFromServerWithPageUrl:(NSString *)url
-                               onSuccess:(STPostsDictionaryBlock)success
-                               onFailure:(STErrorBlock)failure {
-    
+                                      onSuccess:(STPostsDictionaryBlock)success
+                                      onFailure:(STErrorBlock)failure {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *accessToken = [userDefaults objectForKey:STInstagramTokenKey];
     

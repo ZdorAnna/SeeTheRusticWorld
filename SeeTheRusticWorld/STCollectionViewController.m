@@ -13,7 +13,12 @@
 
 NSString *const STCollectionViewControllerIdentifier = @"STCollectionViewControllerIdentifier";
 
-@interface STCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate>
+@interface STCollectionViewController ()
+<
+    UICollectionViewDataSource,
+    UICollectionViewDelegate,
+    NSFetchedResultsControllerDelegate
+>
 
 @end
 
@@ -30,8 +35,8 @@ NSString *const STCollectionViewControllerIdentifier = @"STCollectionViewControl
     return [self.dataSource contentCount];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     STCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:STCollectionViewCellIdentifier
                                                                            forIndexPath:indexPath];
     [cell setContent:[self.dataSource contentAtIndexPath:indexPath]];
@@ -40,9 +45,10 @@ NSString *const STCollectionViewControllerIdentifier = @"STCollectionViewControl
 
 #pragma mark - UICollectionViewDelegate
 
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (([self.dataSource contentCount] >= FETCH_BATCH_SIZE) && (indexPath.row == ([self.dataSource contentCount] - 6))) {       [self.dataSource loadNextPage];
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell
+    forItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (([self.dataSource contentCount] >= FETCH_BATCH_SIZE) && (indexPath.row == ([self.dataSource contentCount] - 6))) {
+        [self.dataSource loadNextPage];
     }
 }
 

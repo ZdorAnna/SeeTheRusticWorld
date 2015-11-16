@@ -37,7 +37,8 @@ NSString *const STContainerViewControllerIdentifier = @"STContainerViewControlle
     [viewController didMoveToParentViewController:self];
 }
 
-- (void)changeFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController {
+- (void)changeFromViewController:(UIViewController *)fromViewController
+                toViewController:(UIViewController *)toViewController {
     toViewController.view.frame = [self frameForContentController];
     
     [fromViewController willMoveToParentViewController:nil];

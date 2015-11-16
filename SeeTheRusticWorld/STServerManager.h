@@ -17,7 +17,9 @@ typedef void(^STErrorBlock)(NSError *error, NSInteger statusCode);
 + (STServerManager *)sharedManager;
 - (NSURLRequest *)userAuthorizationRequest;
 - (void)requestTokenWithCode:(NSString *)code onSuccess:(STTokenBlock)success onFailure:(STErrorBlock)failure;
-- (void)requestRecentPostsFromServerWithPageUrl:(NSString *)url onSuccess:(STPostsDictionaryBlock)success onFailure:(STErrorBlock)failure;
+- (void)requestRecentPostsFromServerWithPageUrl:(NSString *)url
+                                      onSuccess:(STPostsDictionaryBlock)success
+                                      onFailure:(STErrorBlock)failure;
 
 @end
 

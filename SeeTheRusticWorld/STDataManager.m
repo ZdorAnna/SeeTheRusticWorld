@@ -47,13 +47,13 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
 
 #pragma mark - Methods
 
-- (void)insertModelWithImageURL:(NSString *)imageUrlString text:(NSString *)text modelIdentifier:(NSString *)identifier {
-    
+- (void)insertModelWithImageURL:(NSString *)imageUrlString
+                           text:(NSString *)text
+                modelIdentifier:(NSString *)identifier {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     
-    NSEntityDescription* description =
-    [NSEntityDescription entityForName:@"STPost"
-                inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription* description = [NSEntityDescription entityForName:@"STPost"
+                                                   inManagedObjectContext:self.managedObjectContext];
     
     [request setEntity:description];
     
@@ -83,7 +83,6 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
         [newManagedObject setValue:identifier forKey:@"identifier"];
         [newManagedObject setValue:[NSDate date] forKey:@"createdTime"];
         
-        // Save the context.
         NSError *error = nil;
         if (![context save:&error]) {
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -92,8 +91,7 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
     }
 }
 
--(void)parsingResponseToPostsArray:(STMappingBlock)completionBlock {
-    
+- (void)parsingResponseToPostsArray:(STMappingBlock)completionBlock {
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
