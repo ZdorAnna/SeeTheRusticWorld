@@ -13,7 +13,7 @@
 
 @implementation STServerManager
 
-+ (STServerManager *)sharedManager {
++ (instancetype)sharedManager {
     static STServerManager *manager = nil;
     
     static dispatch_once_t onceToken;
