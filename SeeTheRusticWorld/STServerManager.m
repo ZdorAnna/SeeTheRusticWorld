@@ -7,7 +7,7 @@
 //
 
 #import "STServerManager.h"
-#import "AFNetworking.h"
+#import <AFNetworking/AFNetworking.h>
 
 @implementation STServerManager
 static NSString *const kTagsCount  = @"33";
