@@ -9,8 +9,7 @@
 #import "STDataSource.h"
 #import "STCoreDataManager.h"
 #import "STDataManager.h"
-
-#define FETCH_BATCH_SIZE 33
+#import "STDefines.h"
 
 @interface STDataSource ()
 

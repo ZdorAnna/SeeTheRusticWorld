@@ -9,9 +9,9 @@
 #import "STTableViewController.h"
 #import "STTableViewCell.h"
 #import "STDataSource.h"
+#import "STDefines.h"
 
 NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentifier";
-#define MIN_COUNT_CELLS 33
 
 @interface STTableViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
@@ -46,7 +46,7 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (([self.dataSource contentCount] >= MIN_COUNT_CELLS) && (indexPath.row == ([self.dataSource contentCount] - 6))) {       [self.dataSource loadNextPage];
+    if (([self.dataSource contentCount] >= FETCH_BATCH_SIZE) && (indexPath.row == ([self.dataSource contentCount] - 6))) {       [self.dataSource loadNextPage];
     }
 }
 

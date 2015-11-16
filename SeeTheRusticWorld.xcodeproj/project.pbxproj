@@ -49,7 +49,6 @@
 		951353A31BCD6DBE006F86D7 /* STDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STDefines.h; sourceTree = "<group>"; };
 		953947301BD6CECF0051C475 /* STDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDataManager.h; sourceTree = "<group>"; };
 		953947311BD6CECF0051C475 /* STDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STDataManager.m; sourceTree = "<group>"; };
-		953F8F541BC976EC0074D3E1 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = ../PrefixHeader.pch; sourceTree = "<group>"; };
 		955C06B91BD8C40D0097F882 /* STPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPost.h; sourceTree = "<group>"; };
 		955C06BA1BD8C40D0097F882 /* STPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPost.m; sourceTree = "<group>"; };
 		957C2A861BC437F8004D636E /* STLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLoginViewController.h; sourceTree = "<group>"; };
@@ -189,7 +188,6 @@
 			isa = PBXGroup;
 			children = (
 				95BA4DCE1BBEA81C00CB9D48 /* Info.plist */,
-				953F8F541BC976EC0074D3E1 /* PrefixHeader.pch */,
 				95BA4DCF1BBEA81C00CB9D48 /* main.m */,
 			);
 			name = "Supporting Files";

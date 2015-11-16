@@ -9,9 +9,9 @@
 #import "STCollectionViewController.h"
 #import "STCollectionViewCell.h"
 #import "STDataSource.h"
+#import "STDefines.h"
 
 NSString *const STCollectionViewControllerIdentifier = @"STCollectionViewControllerIdentifier";
-#define MIN_COUNT_CELLS 33
 
 @interface STCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate>
 
@@ -42,7 +42,7 @@ NSString *const STCollectionViewControllerIdentifier = @"STCollectionViewControl
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (([self.dataSource contentCount] >= MIN_COUNT_CELLS) && (indexPath.row == ([self.dataSource contentCount] - 6))) {       [self.dataSource loadNextPage];
+    if (([self.dataSource contentCount] >= FETCH_BATCH_SIZE) && (indexPath.row == ([self.dataSource contentCount] - 6))) {       [self.dataSource loadNextPage];
     }
 }
 

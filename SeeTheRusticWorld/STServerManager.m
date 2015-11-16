@@ -7,10 +7,11 @@
 //
 
 #import "STServerManager.h"
+#import "STDefines.h"
+
 #import <AFNetworking/AFNetworking.h>
 
 @implementation STServerManager
-static NSString *const kTagsCount  = @"33";
 
 + (STServerManager *)sharedManager {
     static STServerManager *manager = nil;
@@ -76,7 +77,7 @@ static NSString *const kTagsCount  = @"33";
         if (!url) {
             parameters = @{
                            STInstagramTokenKey : accessToken,
-                           @"count"            : kTagsCount
+                           @"count"            : STCountPostsInRequest
                            };
             URLString = [NSString stringWithFormat:STInstagramPostsRequestString, STInstagramTagName];
             
