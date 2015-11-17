@@ -9,16 +9,22 @@
 #import "STTableViewController.h"
 #import "STTableViewCell.h"
 #import "STDataSource.h"
+#import "STDefines.h"
 
 NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentifier";
-#define MIN_COUNT_CELLS 33
 
-@interface STTableViewController () <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
+@interface STTableViewController ()
+<
+    UITableViewDataSource,
+    UITableViewDelegate,
+    NSFetchedResultsControllerDelegate
+>
 
 @end
 
 @implementation STTableViewController
-- (void)viewWillAppear:(BOOL)animated{
+
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     self.dataSource = [[STDataSource alloc] initWithDelegate:self];
 }
@@ -30,12 +36,12 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     STTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:STTableViewCellIdentifier
                                                             forIndexPath:indexPath];
     
     if (!cell) {
-        cell = [[STTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:STTableViewCellIdentifier];
+        cell = [[STTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:STTableViewCellIdentifier];
     }
     
     [cell setContent:[self.dataSource contentAtIndexPath:indexPath]];
@@ -44,12 +50,16 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView
+  willDisplayCell:(UITableViewCell *)cell
+forRowAtIndexPath:(NSIndexPath *)indexPath {
+    BOOL isLastCell = (indexPath.row == ([self.dataSource contentCount] - STCountElementsToLoadMore));
+    BOOL isMoreContent = ([self.dataSource contentCount] >= STCountPostsInRequest);
     
-    if (([self.dataSource contentCount] >= MIN_COUNT_CELLS) && (indexPath.row == ([self.dataSource contentCount] - 6))) {       [self.dataSource loadNextPage];
+    if (isMoreContent && isLastCell) {
+        [self.dataSource loadNextPage];
     }
 }
-
 
 #pragma mark - NSFetchedResultsControllerDelegate
 
@@ -60,7 +70,6 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
-    
     UITableView *tableView = self.tableView;
         
     switch(type) {
@@ -84,6 +93,5 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
 }
-
 
 @end

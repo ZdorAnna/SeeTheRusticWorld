@@ -9,11 +9,16 @@
 #import "STCollectionViewController.h"
 #import "STCollectionViewCell.h"
 #import "STDataSource.h"
+#import "STDefines.h"
 
 NSString *const STCollectionViewControllerIdentifier = @"STCollectionViewControllerIdentifier";
-#define MIN_COUNT_CELLS 33
 
-@interface STCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate>
+@interface STCollectionViewController ()
+<
+    UICollectionViewDataSource,
+    UICollectionViewDelegate,
+    NSFetchedResultsControllerDelegate
+>
 
 @end
 
@@ -30,8 +35,8 @@ NSString *const STCollectionViewControllerIdentifier = @"STCollectionViewControl
     return [self.dataSource contentCount];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     STCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:STCollectionViewCellIdentifier
                                                                            forIndexPath:indexPath];
     [cell setContent:[self.dataSource contentAtIndexPath:indexPath]];
@@ -40,9 +45,13 @@ NSString *const STCollectionViewControllerIdentifier = @"STCollectionViewControl
 
 #pragma mark - UICollectionViewDelegate
 
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell
+    forItemAtIndexPath:(NSIndexPath *)indexPath {
+    BOOL isLastCell = (indexPath.row == ([self.dataSource contentCount] - STCountElementsToLoadMore));
+    BOOL isMoreContent = ([self.dataSource contentCount] >= STCountPostsInRequest);
     
-    if (([self.dataSource contentCount] >= MIN_COUNT_CELLS) && (indexPath.row == ([self.dataSource contentCount] - 6))) {       [self.dataSource loadNextPage];
+    if (isMoreContent && isLastCell) {
+        [self.dataSource loadNextPage];
     }
 }
 

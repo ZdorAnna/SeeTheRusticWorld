@@ -10,7 +10,6 @@
 #import "STPost.h"
 #import "UIImageView+AFNetworking.h"
 
-
 NSString *const STCollectionViewCellIdentifier = @"STCollectionViewCellIdentifier";
 
 @interface STCollectionViewCell ()
@@ -21,24 +20,15 @@ NSString *const STCollectionViewCellIdentifier = @"STCollectionViewCellIdentifie
 
 @implementation STCollectionViewCell
 
-- (void)setContent:(STPost *)content {
-    
+- (void)setContent:(STPost *)content {    
     NSURL *url = [NSURL URLWithString:content.imageUrlString];
-    NSURLRequest* request = [NSURLRequest requestWithURL:url];
-    
-    __weak typeof(self) weakSelf = self;
+    [self.contentImage setImageWithURL:url];
+}
+
+- (void)prepareForReuse {
+    [super prepareForReuse];
     self.contentImage.image = nil;
-    
-    [self.contentImage
-     setImageWithURLRequest:request
-     placeholderImage:nil
-     success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-         weakSelf.contentImage.image = image;
-         [weakSelf layoutSubviews];
-     }
-     failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-         
-     }];
+    [self.contentImage cancelImageRequestOperation];
 }
 
 @end

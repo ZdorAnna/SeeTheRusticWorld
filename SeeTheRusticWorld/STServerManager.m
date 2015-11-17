@@ -7,12 +7,13 @@
 //
 
 #import "STServerManager.h"
-#import "AFNetworking.h"
+#import "STDefines.h"
+
+#import <AFNetworking/AFNetworking.h>
 
 @implementation STServerManager
-static NSString *const kTagsCount  = @"33";
 
-+ (STServerManager *)sharedManager {
++ (instancetype)sharedManager {
     static STServerManager *manager = nil;
     
     static dispatch_once_t onceToken;
@@ -24,16 +25,17 @@ static NSString *const kTagsCount  = @"33";
 }
 
 - (NSURLRequest *)userAuthorizationRequest {
-    NSString *uriString = [NSString stringWithFormat:STInstagramAuthorizationRequestString, STInstagramClientId, STInstagramCallbackString];
+    NSString *uriString = [NSString stringWithFormat:STInstagramAuthorizationRequestString, STInstagramClientId,
+                           STInstagramCallbackString];
     return [NSURLRequest requestWithURL:[NSURL URLWithString:uriString]];
 }
 
 - (void)requestTokenWithCode:(NSString *)code
-                     onSuccess:(STTokenBlock)success
-                     onFailure:(STErrorBlock)failure{
-    AFHTTPRequestOperationManager *manager =[AFHTTPRequestOperationManager manager];
+                   onSuccess:(STTokenBlock)success
+                   onFailure:(STErrorBlock)failure {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parametersDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                          code, @"code",
+                                          code,                      @"code",
                                           STInstagramCallbackString, @"redirect_uri",
                                           @"authorization_code",     @"grant_type",
                                           STInstagramClientId,       @"client_id",
@@ -46,13 +48,11 @@ static NSString *const kTagsCount  = @"33";
               NSString *accessToken = [responseObject objectForKey:STInstagramTokenKey];
               NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
               [userDefaults setObject:accessToken forKey:STInstagramTokenKey];
-              [userDefaults synchronize];
 
               if (success) {
                   success (accessToken);
                   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                   [userDefaults setObject:accessToken forKey:STInstagramTokenKey];
-                  [userDefaults synchronize];
               }
               
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -63,9 +63,8 @@ static NSString *const kTagsCount  = @"33";
 }
 
 - (void)requestRecentPostsFromServerWithPageUrl:(NSString *)url
-                               onSuccess:(STPostsDictionaryBlock)success
-                               onFailure:(STErrorBlock)failure {
-    
+                                      onSuccess:(STPostsDictionaryBlock)success
+                                      onFailure:(STErrorBlock)failure {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *accessToken = [userDefaults objectForKey:STInstagramTokenKey];
     
@@ -76,7 +75,7 @@ static NSString *const kTagsCount  = @"33";
         if (!url) {
             parameters = @{
                            STInstagramTokenKey : accessToken,
-                           @"count"            : kTagsCount
+                           @"count"            : [NSString stringWithFormat:@"%lu", STCountPostsInRequest]
                            };
             URLString = [NSString stringWithFormat:STInstagramPostsRequestString, STInstagramTagName];
             

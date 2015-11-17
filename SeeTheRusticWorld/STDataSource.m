@@ -9,8 +9,7 @@
 #import "STDataSource.h"
 #import "STCoreDataManager.h"
 #import "STDataManager.h"
-
-#define FETCH_BATCH_SIZE 33
+#import "STDefines.h"
 
 @interface STDataSource ()
 
@@ -22,22 +21,11 @@
 
 @implementation STDataSource
 
-@synthesize managedObjectContext = _managedObjectContext;
-
-- (NSManagedObjectContext*) managedObjectContext {
-    if (!_managedObjectContext) {
-        _managedObjectContext = [[STCoreDataManager sharedManager] managedObjectContext];
-    }
-    return _managedObjectContext;
-}
-
-#pragma mark - STDataSource methods
-
 - (instancetype)initWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate {
     self = [self init];
     if (self) {
         self.delegate = delegate;
-        if ([self contentCount] < FETCH_BATCH_SIZE - 1) {
+        if ([self contentCount] < STCountPostsInRequest - 1) {
             [self loadNextPage];
         }
     }
@@ -59,16 +47,21 @@
 }
 
 - (void)loadNextPage {
-        STDataManager *dataManager = [[STDataManager alloc] initWithFetchResultController:self.fetchedResultsController
+    STDataManager *dataManager = [[STDataManager alloc] initWithFetchResultController:self.fetchedResultsController
                                                                      managedObjectContext:self.managedObjectContext];
-        [dataManager loadNextPage];
+    [dataManager loadNextPage];
 }
 
+- (NSManagedObjectContext*) managedObjectContext {
+    if (!_managedObjectContext) {
+        _managedObjectContext = [[STCoreDataManager sharedManager] managedObjectContext];
+    }
+    return _managedObjectContext;
+}
 
 #pragma mark - Fetched results controller
 
  - (NSFetchedResultsController *)fetchedResultsController {
-     
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
@@ -77,7 +70,7 @@
                                               inManagedObjectContext:self.managedObjectContext];
      
     [fetchRequest setEntity:entity];
-    [fetchRequest setFetchBatchSize:FETCH_BATCH_SIZE];
+    [fetchRequest setFetchBatchSize:STCountPostsInRequest];
     
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdTime" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];
@@ -89,9 +82,8 @@
                                                              managedObjectContext:self.managedObjectContext
                                                              sectionNameKeyPath:nil
                                                              cacheName:nil];
-     self.fetchedResultsController.delegate = self.delegate;
+    self.fetchedResultsController.delegate = self.delegate;
 
-    
     NSError *error = nil;
     if (![self.fetchedResultsController performFetch:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);

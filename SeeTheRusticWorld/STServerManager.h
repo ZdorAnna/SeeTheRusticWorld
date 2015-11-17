@@ -14,10 +14,12 @@ typedef void(^STErrorBlock)(NSError *error, NSInteger statusCode);
 
 @interface STServerManager : NSObject
 
-+ (STServerManager *)sharedManager;
++ (instancetype)sharedManager;
 - (NSURLRequest *)userAuthorizationRequest;
 - (void)requestTokenWithCode:(NSString *)code onSuccess:(STTokenBlock)success onFailure:(STErrorBlock)failure;
-- (void)requestRecentPostsFromServerWithPageUrl:(NSString *)url onSuccess:(STPostsDictionaryBlock)success onFailure:(STErrorBlock)failure;
+- (void)requestRecentPostsFromServerWithPageUrl:(NSString *)url
+                                      onSuccess:(STPostsDictionaryBlock)success
+                                      onFailure:(STErrorBlock)failure;
 
 @end
 

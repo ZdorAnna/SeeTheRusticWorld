@@ -29,15 +29,14 @@ NSString *const STContainerViewControllerIdentifier = @"STContainerViewControlle
     [self displayViewController:self.tableViewController];
 }
 
-#pragma mark - Methods
-
 - (void) displayViewController:(UIViewController *)viewController {
     [self addChildViewController:viewController];
     [self.view addSubview:viewController.view];
     [viewController didMoveToParentViewController:self];
 }
 
-- (void)changeFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController {
+- (void)changeFromViewController:(UIViewController *)fromViewController
+                toViewController:(UIViewController *)toViewController {
     toViewController.view.frame = [self frameForContentController];
     
     [fromViewController willMoveToParentViewController:nil];
@@ -73,4 +72,5 @@ NSString *const STContainerViewControllerIdentifier = @"STContainerViewControlle
 - (CGRect)frameForContentController {
     return self.view.bounds;
 }
+
 @end

@@ -8,8 +8,7 @@
 
 #import "STTableViewCell.h"
 #import "STPost.h"
-#import "UIImageView+AFNetworking.h"
-
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 NSString *const STTableViewCellIdentifier = @"STTableViewCellIdentifier";
 
@@ -23,26 +22,16 @@ NSString *const STTableViewCellIdentifier = @"STTableViewCellIdentifier";
 @implementation STTableViewCell
 
 - (void)setContent:(STPost *)content {
-    
     self.contentText.text = content.text;
     
     NSURL *url = [NSURL URLWithString:content.imageUrlString];
-    NSURLRequest* request = [NSURLRequest requestWithURL:url];
-    
-    __weak typeof(self) weakSelf = self;
+    [self.contentImage setImageWithURL:url];
+}
+
+- (void)prepareForReuse {
+    [super prepareForReuse];
     self.contentImage.image = nil;
-
-    [self.contentImage
-     setImageWithURLRequest:request
-     placeholderImage:nil
-     success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-         weakSelf.contentImage.image = image;
-         [weakSelf layoutSubviews];
-     }
-     failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-         
-     }];
-
+    [self.contentImage cancelImageRequestOperation];
 }
 
 @end
