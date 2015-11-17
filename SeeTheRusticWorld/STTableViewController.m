@@ -23,6 +23,7 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 @end
 
 @implementation STTableViewController
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     self.dataSource = [[STDataSource alloc] initWithDelegate:self];
@@ -49,7 +50,8 @@ NSString *const STTableViewControllerIdentifier = @"STTableViewControllerIdentif
 
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell
+- (void)tableView:(UITableView *)tableView
+  willDisplayCell:(UITableViewCell *)cell
 forRowAtIndexPath:(NSIndexPath *)indexPath {
     BOOL isLastCell = (indexPath.row == ([self.dataSource contentCount] - STCountElementsToLoadMore));
     BOOL isMoreContent = ([self.dataSource contentCount] >= STCountPostsInRequest);
@@ -68,7 +70,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
-    
     UITableView *tableView = self.tableView;
         
     switch(type) {
@@ -92,6 +93,5 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
 }
-
 
 @end

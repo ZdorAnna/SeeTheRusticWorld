@@ -72,4 +72,5 @@ NSString *const STContainerViewControllerIdentifier = @"STContainerViewControlle
 - (CGRect)frameForContentController {
     return self.view.bounds;
 }
+
 @end

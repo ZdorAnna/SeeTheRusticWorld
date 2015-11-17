@@ -43,8 +43,9 @@
 
 #pragma mark - UIWebViewDelegete
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
- navigationType:(UIWebViewNavigationType)navigationType {
+- (BOOL)webView:(UIWebView *)webView
+shouldStartLoadWithRequest:(NSURLRequest *)request
+            navigationType:(UIWebViewNavigationType)navigationType {
         if ([[[request URL] description] rangeOfString:@"code="].location != NSNotFound) {
         
         NSString *authToken;
