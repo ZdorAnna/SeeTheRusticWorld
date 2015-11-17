@@ -7,6 +7,7 @@
 //
 
 #import "STCoreDataManager.h"
+#import <CoreData/CoreData.h>
 
 @interface STCoreDataManager ()
 
@@ -68,7 +69,7 @@
         dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
         dict[NSLocalizedFailureReasonErrorKey] = failureReason;
         dict[NSUnderlyingErrorKey] = error;
-        error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
+        error = [NSError errorWithDomain:@"zdor.com.SeeTheRusticWorld" code:9999 userInfo:dict];
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
     }
     

@@ -7,9 +7,10 @@
 //
 
 #import "STDataManager.h"
-#import <CoreData/CoreData.h>
 #import "STServerManager.h"
 #import "STPost.h"
+
+#import <CoreData/CoreData.h>
 
 typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
 
@@ -45,7 +46,7 @@ typedef void(^STMappingBlock)(NSArray *postsArray, NSString *nextPage);
     }];
 }
 
-#pragma mark - Methods
+#pragma mark - Private Methods
 
 - (void)insertModelWithImageURL:(NSString *)imageUrlString
                            text:(NSString *)text

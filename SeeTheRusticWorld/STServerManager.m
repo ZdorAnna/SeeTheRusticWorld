@@ -48,13 +48,11 @@
               NSString *accessToken = [responseObject objectForKey:STInstagramTokenKey];
               NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
               [userDefaults setObject:accessToken forKey:STInstagramTokenKey];
-              [userDefaults synchronize];
 
               if (success) {
                   success (accessToken);
                   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                   [userDefaults setObject:accessToken forKey:STInstagramTokenKey];
-                  [userDefaults synchronize];
               }
               
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

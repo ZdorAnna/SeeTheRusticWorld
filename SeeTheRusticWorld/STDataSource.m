@@ -21,8 +21,6 @@
 
 @implementation STDataSource
 
-#pragma mark - STDataSource methods
-
 - (instancetype)initWithDelegate:(id<NSFetchedResultsControllerDelegate>)delegate {
     self = [self init];
     if (self) {

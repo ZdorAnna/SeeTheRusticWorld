@@ -29,8 +29,6 @@
    }
 }
 
-#pragma mark - Methods
-
 - (void)authorize {
     NSURLRequest *request = [[STServerManager sharedManager] userAuthorizationRequest];
     [self.webView loadRequest:request];

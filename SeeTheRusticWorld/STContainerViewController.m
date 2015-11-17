@@ -29,8 +29,6 @@ NSString *const STContainerViewControllerIdentifier = @"STContainerViewControlle
     [self displayViewController:self.tableViewController];
 }
 
-#pragma mark - Methods
-
 - (void) displayViewController:(UIViewController *)viewController {
     [self addChildViewController:viewController];
     [self.view addSubview:viewController.view];

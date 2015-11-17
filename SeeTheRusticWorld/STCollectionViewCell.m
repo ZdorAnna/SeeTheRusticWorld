@@ -10,7 +10,6 @@
 #import "STPost.h"
 #import "UIImageView+AFNetworking.h"
 
-
 NSString *const STCollectionViewCellIdentifier = @"STCollectionViewCellIdentifier";
 
 @interface STCollectionViewCell ()
